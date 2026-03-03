@@ -25,10 +25,13 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 
-def _run_demo(mode: str, model: str, key_by: str = "service") -> None:
-    log.info("--- Stage 05 Demo (mode=%s, model=%s, key_by=%s) ---", mode, model, key_by)
+def _run_demo(mode: str, model: str, key_by: str = "service",
+              use_runtime_thresholds: bool = False) -> None:
+    log.info("--- Stage 05 Demo (mode=%s, model=%s, key_by=%s, runtime_thr=%s) ---",
+             mode, model, key_by, use_runtime_thresholds)
     demo_mod = importlib.import_module("scripts.stage_05_runtime_demo")
-    summary = demo_mod.run_demo(mode, model, key_by)
+    summary = demo_mod.run_demo(mode, model, key_by,
+                                use_runtime_thresholds=use_runtime_thresholds)
     log.info("Demo finished: %s windows emitted, %.1f%% anomaly rate",
              summary.get("windows_emitted", 0),
              summary.get("anomaly_rate_pct", 0.0))
@@ -55,10 +58,14 @@ def main() -> None:
                         help="Run demo only (skip benchmark)")
     parser.add_argument("--skip-demo", action="store_true",
                         help="Run benchmark only (skip demo)")
+    parser.add_argument("--use-runtime-thresholds", action="store_true",
+                        dest="use_runtime_thresholds",
+                        help="Load thresholds from artifacts/threshold_runtime.json")
     args = parser.parse_args()
 
     if not args.skip_demo:
-        _run_demo(args.mode, args.model, key_by="service")
+        _run_demo(args.mode, args.model, key_by="service",
+                  use_runtime_thresholds=args.use_runtime_thresholds)
 
     if not args.skip_benchmark:
         _run_benchmark(args.mode, args.model)

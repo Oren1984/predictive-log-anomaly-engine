@@ -22,6 +22,17 @@ models/
 reports/*.csv
 reports/*.json
 reports/*.jsonl
+artifacts/*.json
 
 # Logs
 ai_workspace/logs/
+
+# Claude temp cwd markers
+tmpclaude-*-cwd
+
+# Synthetic data
+data/synth/
+
+# Windows junk
+nul
+tmpclaude-*-cwd

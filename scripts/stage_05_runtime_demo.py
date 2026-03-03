@@ -90,15 +90,16 @@ def _row_to_event(row: dict, key_by: str = "service") -> dict:
     }
 
 
-def run_demo(mode: str, model: str, key_by: str = "service") -> dict:
+def run_demo(mode: str, model: str, key_by: str = "service",
+             use_runtime_thresholds: bool = False) -> dict:
     """
     Stream events through InferenceEngine and collect RiskResults.
 
     Returns a summary dict with counts.
     """
     log.info("=== Stage 05 Runtime Demo ===")
-    log.info("mode=%s  model=%s  window=%d  stride=%d  key_by=%s",
-             mode, model, WINDOW_SIZE, STRIDE, key_by)
+    log.info("mode=%s  model=%s  window=%d  stride=%d  key_by=%s  runtime_thresholds=%s",
+             mode, model, WINDOW_SIZE, STRIDE, key_by, use_runtime_thresholds)
     log.info("Parquet: %s", EVENTS_PARQUET)
 
     max_events = DEMO_MAX_EVENTS if mode == "demo" else None
@@ -120,6 +121,7 @@ def run_demo(mode: str, model: str, key_by: str = "service") -> dict:
         mode=model,
         window_size=WINDOW_SIZE,
         stride=STRIDE,
+        use_runtime_thresholds=use_runtime_thresholds,
     )
     engine.load_artifacts()
 
@@ -224,8 +226,13 @@ def main() -> None:
                         dest="key_by",
                         help="Stream key granularity: service (one stream per service) "
                              "or session (one stream per session_id)")
+    parser.add_argument("--use-runtime-thresholds", action="store_true",
+                        dest="use_runtime_thresholds",
+                        help="Load thresholds from artifacts/threshold_runtime.json "
+                             "instead of the default threshold.json files")
     args = parser.parse_args()
-    run_demo(args.mode, args.model, args.key_by)
+    run_demo(args.mode, args.model, args.key_by,
+             use_runtime_thresholds=args.use_runtime_thresholds)
 
 
 if __name__ == "__main__":

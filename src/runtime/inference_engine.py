@@ -44,6 +44,7 @@ class InferenceEngine:
         stride: int = 10,
         max_stream_keys: int = 5000,
         root: Optional[Path] = None,
+        use_runtime_thresholds: bool = False,
     ) -> None:
         if mode not in self.VALID_MODES:
             raise ValueError(
@@ -53,14 +54,23 @@ class InferenceEngine:
         self.window_size = window_size
         self.stride = stride
         self.root = Path(root) if root is not None else _ROOT
+        self.use_runtime_thresholds = use_runtime_thresholds
 
         self.buffer = SequenceBuffer(window_size, stride, max_stream_keys)
 
         # Runtime artifacts (populated by load_artifacts)
         self._vocab: dict[str, str] = {}            # str(token_id) -> template_text
         self._templates: dict[str, str] = {}        # str(template_id) -> template_text
+        # Original thresholds (also serve as normalization denominators in ensemble)
         self._threshold_baseline: float = 0.33
         self._threshold_transformer: float = 0.034
+        self._threshold_ensemble: float = 1.0       # normalized; 1.0 = either model votes
+
+        # Runtime overrides for baseline/transformer *decision* only.
+        # Ensemble normalization always uses the original _threshold_* above so
+        # that the calibrated _threshold_ensemble score space remains consistent.
+        self._rt_threshold_baseline: Optional[float] = None
+        self._rt_threshold_transformer: Optional[float] = None
 
         self._extractor: Optional[BaselineFeatureExtractor] = None
         self._baseline_model: Optional[BaselineAnomalyModel] = None
@@ -116,6 +126,34 @@ class InferenceEngine:
         else:
             logger.warning("threshold_transformer.json not found; using default %.4f",
                            self._threshold_transformer)
+
+        # Optional runtime-calibrated thresholds (override defaults when requested)
+        if self.use_runtime_thresholds:
+            thr_rt_path = root / "artifacts" / "threshold_runtime.json"
+            if thr_rt_path.exists():
+                with open(thr_rt_path, encoding="utf-8") as fh:
+                    rt_data = json.load(fh)
+                rt_thresholds = rt_data.get("thresholds", {})
+                # Store in separate attributes so ensemble normalization
+                # continues to use the original _threshold_baseline /
+                # _threshold_transformer denominators unchanged.
+                if "baseline" in rt_thresholds:
+                    self._rt_threshold_baseline = float(rt_thresholds["baseline"])
+                    logger.info("Runtime baseline decision threshold: %.6f",
+                                self._rt_threshold_baseline)
+                if "transformer" in rt_thresholds:
+                    self._rt_threshold_transformer = float(rt_thresholds["transformer"])
+                    logger.info("Runtime transformer decision threshold: %.6f",
+                                self._rt_threshold_transformer)
+                if "ensemble" in rt_thresholds:
+                    self._threshold_ensemble = float(rt_thresholds["ensemble"])
+                    logger.info("Runtime ensemble threshold: %.6f", self._threshold_ensemble)
+                logger.info("Runtime thresholds loaded from %s", thr_rt_path)
+            else:
+                logger.warning(
+                    "--use-runtime-thresholds requested but %s not found; "
+                    "using default thresholds", thr_rt_path,
+                )
 
         # Models
         if self.mode in ("baseline", "ensemble"):
@@ -285,12 +323,20 @@ class InferenceEngine:
 
         if self.mode == "baseline":
             score = self.score_baseline(seq)
-            threshold = self._threshold_baseline
+            threshold = (
+                self._rt_threshold_baseline
+                if self._rt_threshold_baseline is not None
+                else self._threshold_baseline
+            )
             model_name = "baseline"
 
         elif self.mode == "transformer":
             score = self.score_transformer(seq)
-            threshold = self._threshold_transformer
+            threshold = (
+                self._rt_threshold_transformer
+                if self._rt_threshold_transformer is not None
+                else self._threshold_transformer
+            )
             model_name = "transformer"
             top_predictions = self._get_top_predictions(seq)
 
@@ -303,7 +349,7 @@ class InferenceEngine:
             b_norm = b_score / (self._threshold_baseline + 1e-9)
             t_norm = t_score / (self._threshold_transformer + 1e-9)
             score = (b_norm + t_norm) / 2.0
-            threshold = 1.0
+            threshold = self._threshold_ensemble
             model_name = "ensemble"
             top_predictions = self._get_top_predictions(seq)
 
