@@ -1,0 +1,28 @@
+{
+  "alert_id": "9791033e-8dc5-4ab4-b57f-b2ffd7817a37",
+  "severity": "critical",
+  "service": "bgl",
+  "score": 130.414887,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=1730: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO <NUM> microseconds spent in the rbs signal handler...",
+      "tid=1369: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL <NUM>:<HEX> <NUM>:<HEX> <NUM>:<HEX> <NUM>:<HEX>",
+      "tid=1636: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL program interrupt: unimplemented operation..<NUM>",
+      "tid=5415: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO instruction cache parity error corrected",
+      "tid=1729: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO <NUM> floating point alignment exceptions"
+    ],
+    "token_count": 20,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "ensemble",
+  "threshold": 1.0,
+  "meta": {
+    "stream_key": "bgl:",
+    "is_anomaly": true,
+    "window_size": 50,
+    "label": 1,
+    "emit_index": 1
+  }
+}

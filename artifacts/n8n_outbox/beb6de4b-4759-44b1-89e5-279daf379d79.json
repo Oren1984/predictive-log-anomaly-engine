@@ -1,0 +1,28 @@
+{
+  "alert_id": "beb6de4b-4759-44b1-89e5-279daf379d79",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 1704067200.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=8: - <HEX> <DATE> <NODE> <TS> <NODE> NULL DISCOVERY ERROR Found invalid node ecid in processor card slo...",
+      "tid=8: - <HEX> <DATE> <NODE> <TS> <NODE> NULL DISCOVERY ERROR Found invalid node ecid in processor card slo...",
+      "tid=8: - <HEX> <DATE> <NODE> <TS> <NODE> NULL DISCOVERY ERROR Found invalid node ecid in processor card slo...",
+      "tid=8: - <HEX> <DATE> <NODE> <TS> <NODE> NULL DISCOVERY ERROR Found invalid node ecid in processor card slo...",
+      "tid=8: - <HEX> <DATE> <NODE> <TS> <NODE> NULL DISCOVERY ERROR Found invalid node ecid in processor card slo..."
+    ],
+    "token_count": 5,
+    "start_ts": 1704067200.0,
+    "end_ts": 1704067200.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": null,
+    "emit_index": 11
+  }
+}

@@ -1,0 +1,5 @@
+Grafana Dashboard (local):
+http://localhost:3000/d/stage08-api-obs/stage-08-api-observability
+
+User: admin
+Password: admin

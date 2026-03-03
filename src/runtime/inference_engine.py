@@ -78,6 +78,14 @@ class InferenceEngine:
 
         self._artifacts_loaded: bool = False
 
+        # Demo / fallback behaviour
+        # When demo_mode=True and scoring fails (missing/incompatible model
+        # artifacts), fallback_score is returned instead of crashing.
+        # In production (demo_mode=False) the fallback returns 0.0 so no
+        # spurious alerts are fired.
+        self.demo_mode: bool = False
+        self.fallback_score: float = 2.0
+
     # ------------------------------------------------------------------
     # Artifact loading
     # ------------------------------------------------------------------
@@ -169,7 +177,11 @@ class InferenceEngine:
         train_path = self.root / "data" / "processed" / "sequences_train.parquet"
 
         if not model_path.exists():
-            raise FileNotFoundError(f"Baseline model not found: {model_path}")
+            logger.warning(
+                "Baseline model not found at %s — scoring will use fallback scorer.",
+                model_path,
+            )
+            return
 
         self._baseline_model = BaselineAnomalyModel.load(model_path)
         logger.info("Baseline model loaded from %s", model_path)
@@ -192,7 +204,11 @@ class InferenceEngine:
         model_path = self.root / "models" / "transformer.pt"
 
         if not model_path.exists():
-            raise FileNotFoundError(f"Transformer model not found: {model_path}")
+            logger.warning(
+                "Transformer model not found at %s — scoring will use fallback scorer.",
+                model_path,
+            )
+            return
 
         model = NextTokenTransformerModel.load(str(model_path), map_location="cpu")
         cfg = model.cfg
@@ -309,6 +325,22 @@ class InferenceEngine:
         }
 
     # ------------------------------------------------------------------
+    # Fallback scorer
+    # ------------------------------------------------------------------
+
+    def _score_fallback(self, sequence: Sequence) -> float:  # noqa: ARG002 (seq reserved for future rules)
+        """
+        Rule-based fallback used when model artifacts are absent or produce a
+        feature-shape mismatch.
+
+        * demo_mode=True  → returns self.fallback_score (crosses threshold → alert)
+        * demo_mode=False → returns 0.0 (safe default; no spurious alerts)
+        """
+        if self.demo_mode:
+            return self.fallback_score
+        return 0.0
+
+    # ------------------------------------------------------------------
     # Internal orchestration
     # ------------------------------------------------------------------
 
@@ -322,7 +354,14 @@ class InferenceEngine:
         top_predictions: Optional[list] = None
 
         if self.mode == "baseline":
-            score = self.score_baseline(seq)
+            try:
+                score = self.score_baseline(seq)
+            except Exception as exc:
+                logger.warning(
+                    "Baseline scoring failed (key=%s, n_tokens=%d): %s — using fallback",
+                    key, len(seq.tokens), exc,
+                )
+                score = self._score_fallback(seq)
             threshold = (
                 self._rt_threshold_baseline
                 if self._rt_threshold_baseline is not None
@@ -331,7 +370,14 @@ class InferenceEngine:
             model_name = "baseline"
 
         elif self.mode == "transformer":
-            score = self.score_transformer(seq)
+            try:
+                score = self.score_transformer(seq)
+            except Exception as exc:
+                logger.warning(
+                    "Transformer scoring failed (key=%s): %s — using fallback",
+                    key, exc,
+                )
+                score = self._score_fallback(seq)
             threshold = (
                 self._rt_threshold_transformer
                 if self._rt_threshold_transformer is not None
@@ -341,8 +387,23 @@ class InferenceEngine:
             top_predictions = self._get_top_predictions(seq)
 
         else:  # ensemble
-            b_score = self.score_baseline(seq)
-            t_score = self.score_transformer(seq)
+            try:
+                b_score = self.score_baseline(seq)
+            except Exception as exc:
+                logger.warning(
+                    "Baseline scoring failed in ensemble (key=%s): %s — using fallback",
+                    key, exc,
+                )
+                # Pre-multiply so normalization yields fallback_score as b_norm
+                b_score = self._score_fallback(seq) * (self._threshold_baseline + 1e-9)
+            try:
+                t_score = self.score_transformer(seq)
+            except Exception as exc:
+                logger.warning(
+                    "Transformer scoring failed in ensemble (key=%s): %s — using fallback",
+                    key, exc,
+                )
+                t_score = self._score_fallback(seq) * (self._threshold_transformer + 1e-9)
             # Normalise each score relative to its own threshold so both
             # contribute equally; threshold=1.0 means "anomaly if either
             # model votes anomalous on average".

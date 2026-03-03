@@ -1,0 +1,28 @@
+{
+  "alert_id": "8b4d7161-0a7f-4b89-a01b-1d2f3f421ddd",
+  "severity": "critical",
+  "service": "hdfs",
+  "score": 134.4468,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=6692: <NUM> <NUM> <NUM> INFO dfs.FSNamesystem: BLOCK* NameSystem.addStoredBlock: blockMap updated: <IP> is...",
+      "tid=6695: <NUM> <NUM> <NUM> INFO dfs.FSNamesystem: BLOCK* NameSystem.delete: <BLK> is added to invalidSet of <...",
+      "tid=6685: <NUM> <NUM> <NUM> INFO dfs.DataNode$PacketResponder: Received block <BLK> of size <HEX> from /<IP>",
+      "tid=6701: <NUM> <NUM> <NUM> WARN dfs.DataNode$DataXceiver: <IP>:Got exception while serving <BLK> to /<IP>:",
+      "tid=6689: <NUM> <NUM> <NUM> INFO dfs.FSDataset: Deleting block <BLK> file <PATH><BLK>"
+    ],
+    "token_count": 20,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "ensemble",
+  "threshold": 1.0,
+  "meta": {
+    "stream_key": "hdfs:",
+    "is_anomaly": true,
+    "window_size": 50,
+    "label": 1,
+    "emit_index": 1
+  }
+}

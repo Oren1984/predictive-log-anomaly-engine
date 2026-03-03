@@ -1,3 +1,53 @@
+services:
 
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DISABLE_AUTH: "true"
+      METRICS_ENABLED: "true"
+      MODEL_MODE: "baseline"
+      # Demo/smoke mode: small windows so alerts fire quickly without full model files.
+      # Set DEMO_MODE=false and mount real models+artifacts for production use.
+      DEMO_MODE: "true"
+      DEMO_SCORE: "100.0"
+      WINDOW_SIZE: "5"
+      STRIDE: "1"
+      ALERT_COOLDOWN_SECONDS: "0"
+    volumes:
+      # Mount local model artifacts so the container runs with real models.
+      # If these directories don't exist the mounts are silently empty.
+      - ./models:/app/models:ro
+      - ./artifacts:/app/artifacts
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.retention.time=7d"
+    depends_on:
+      - api
 
+  grafana:
+    image: grafana/grafana:10.4.2
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: "admin"
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus
