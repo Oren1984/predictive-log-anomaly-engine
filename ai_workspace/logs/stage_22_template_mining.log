@@ -1,0 +1,44 @@
+2026-03-03 09:59:34,761  INFO     ============================================================
+2026-03-03 09:59:34,761  INFO     Stage 22: Log Template Mining
+2026-03-03 09:59:34,761  INFO     Input  : C:\Users\ORENS\predictive-log-anomaly-engine\data\processed\events_sample_1m.csv
+2026-03-03 09:59:34,761  INFO     Output : C:\Users\ORENS\predictive-log-anomaly-engine\data\intermediate\events_with_templates.csv
+2026-03-03 09:59:34,761  INFO     Memory start: 81.5 MB
+2026-03-03 09:59:34,761  INFO     ============================================================
+2026-03-03 09:59:34,761  INFO     Loading input CSV ...
+2026-03-03 09:59:37,209  INFO     Loaded 1,000,000 rows.  Memory: 329.3 MB
+2026-03-03 09:59:37,209  INFO     Applying token generalization pipeline ...
+2026-03-03 09:59:41,146  INFO     Generalization done in 3.9s.  Memory: 457.8 MB
+2026-03-03 09:59:41,146  INFO     Assigning deterministic template IDs (alphabetical sort) ...
+2026-03-03 09:59:41,354  INFO     Unique templates found: 7,833
+2026-03-03 09:59:41,354  INFO     Building template dictionary ...
+2026-03-03 09:59:41,535  INFO     Template dictionary ready: 7,833 entries
+2026-03-03 09:59:41,535  INFO     Saving events_with_templates.csv (1,000,000 rows) ...
+2026-03-03 09:59:43,915  INFO     Saving templates.csv (7,833 rows) ...
+2026-03-03 09:59:43,930  INFO     Total elapsed: 9.2s
+2026-03-03 09:59:43,930  INFO     Peak memory  : 470.0 MB
+2026-03-03 09:59:43,973  INFO     Per-dataset template counts:
+2026-03-03 09:59:43,974  INFO       bgl: 7,792 templates
+2026-03-03 09:59:43,975  INFO       hdfs: 41 templates
+2026-03-03 09:59:43,975  INFO     Top 20 templates by frequency:
+2026-03-03 09:59:43,976  INFO        1. [tid=6675] count=108,159  anom=2.75%  '<NUM> <NUM> <NUM> INFO dfs.DataNode$DataXceiver: Receiving block <BLK> src: /<IP'
+2026-03-03 09:59:43,976  INFO        2. [tid=5411] count=107,272  anom=100.00%  '- <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO generating core.<NUM>'
+2026-03-03 09:59:43,976  INFO        3. [tid=6684] count=106,808  anom=1.88%  '<NUM> <NUM> <NUM> INFO dfs.DataNode$PacketResponder: PacketResponder <NUM> for b'
+2026-03-03 09:59:43,976  INFO        4. [tid=6692] count=104,187  anom=2.25%  '<NUM> <NUM> <NUM> INFO dfs.FSNamesystem: BLOCK* NameSystem.addStoredBlock: block'
+2026-03-03 09:59:43,976  INFO        5. [tid=6685] count=103,845  anom=1.71%  '<NUM> <NUM> <NUM> INFO dfs.DataNode$PacketResponder: Received block <BLK> of siz'
+2026-03-03 09:59:43,976  INFO        6. [tid=6689] count=88,215  anom=2.52%  '<NUM> <NUM> <NUM> INFO dfs.FSDataset: Deleting block <BLK> file <PATH><BLK>'
+2026-03-03 09:59:43,976  INFO        7. [tid=6695] count=87,724  anom=2.26%  '<NUM> <NUM> <NUM> INFO dfs.FSNamesystem: BLOCK* NameSystem.delete: <BLK> is adde'
+2026-03-03 09:59:43,976  INFO        8. [tid=6694] count=36,256  anom=2.73%  '<NUM> <NUM> <NUM> INFO dfs.FSNamesystem: BLOCK* NameSystem.allocateBlock: <PATH>'
+2026-03-03 09:59:43,976  INFO        9. [tid=5412] count=27,808  anom=100.00%  '- <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO iar <HEX> dear <HEX>'
+2026-03-03 09:59:43,976  INFO       10. [tid=6672] count=26,848  anom=2.75%  '<NUM> <NUM> <NUM> INFO dfs.DataNode$DataXceiver: <IP> Served block <BLK> to /<IP'
+2026-03-03 09:59:43,976  INFO       11. [tid=6701] count=22,336  anom=2.36%  '<NUM> <NUM> <NUM> WARN dfs.DataNode$DataXceiver: <IP>:Got exception while servin'
+2026-03-03 09:59:43,976  INFO       12. [tid=1729] count=16,188  anom=100.00%  '- <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO <NUM> floating point alignment'
+2026-03-03 09:59:43,976  INFO       13. [tid=1728] count=11,077  anom=100.00%  '- <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO <NUM> double-hummer alignment '
+2026-03-03 09:59:43,976  INFO       14. [tid=6722] count=9,526  anom=0.00%  'KERNDTLB <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL data TLB error interru'
+2026-03-03 09:59:43,976  INFO       15. [tid=1757] count=8,496  anom=100.00%  '- <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO <NUM> total interrupts. <NUM> '
+2026-03-03 09:59:43,976  INFO       16. [tid=1730] count=8,442  anom=100.00%  '- <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO <NUM> microseconds spent in th'
+2026-03-03 09:59:43,977  INFO       17. [tid=6664] count=7,646  anom=2.62%  '<NUM> <NUM> <NUM> INFO dfs.DataBlockScanner: Verification succeeded for <BLK>'
+2026-03-03 09:59:43,977  INFO       18. [tid=1713] count=7,627  anom=100.00%  '- <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO <HEX> double-hummer alignment '
+2026-03-03 09:59:43,977  INFO       19. [tid=5415] count=6,660  anom=100.00%  '- <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO instruction cache parity error'
+2026-03-03 09:59:43,977  INFO       20. [tid=5438] count=5,248  anom=100.00%  '- <HEX> <DATE> NULL <TS> NULL RAS MMCS ERROR idoproxydb hit ASSERT condition: AS'
+2026-03-03 09:59:43,980  INFO     Writing report to C:\Users\ORENS\predictive-log-anomaly-engine\ai_workspace\reports\stage_22_template_report.md ...
+2026-03-03 09:59:43,983  INFO     Report saved.

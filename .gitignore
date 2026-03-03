@@ -1,10 +1,27 @@
-﻿__pycache__/
+﻿
+# Python
+__pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+# Virtual env
 .venv/
 .env
+
+# Data (ALL heavy outputs)
 data/raw/
-data/synth/
+data/intermediate/
+data/processed/*.csv
 data/processed/*.parquet
+
+# Models
 models/
+
+# Reports (keep only markdown)
+reports/*.csv
 reports/*.json
-artifacts/*.json
+reports/*.jsonl
+
+# Logs
+ai_workspace/logs/

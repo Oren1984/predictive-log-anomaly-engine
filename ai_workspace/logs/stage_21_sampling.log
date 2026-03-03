@@ -1,0 +1,67 @@
+2026-03-03 09:51:13,776  INFO     ============================================================
+2026-03-03 09:51:13,776  INFO     Stage 21: Stratified Sampling
+2026-03-03 09:51:13,776  INFO     Target rows : 1,000,000
+2026-03-03 09:51:13,776  INFO     Seed        : 42
+2026-03-03 09:51:13,776  INFO     Chunk size  : 500,000
+2026-03-03 09:51:13,776  INFO     Input file  : C:\Users\ORENS\predictive-log-anomaly-engine\data\processed\events_unified.csv
+2026-03-03 09:51:13,776  INFO     Memory start: 81.7 MB
+2026-03-03 09:51:13,776  INFO     ============================================================
+2026-03-03 09:51:13,777  INFO     Pass 1: counting group sizes ...
+2026-03-03 09:51:22,601  INFO     Total rows    : 15,923,592
+2026-03-03 09:51:22,601  INFO     Groups found  : 4
+2026-03-03 09:51:22,602  INFO       (0, 'bgl') → 348,460 rows  (2.1883%)
+2026-03-03 09:51:22,619  INFO       (0, 'hdfs') → 10,887,379 rows  (68.3726%)
+2026-03-03 09:51:22,619  INFO       (1, 'bgl') → 4,399,503 rows  (27.6288%)
+2026-03-03 09:51:22,620  INFO       (1, 'hdfs') → 288,250 rows  (1.8102%)
+2026-03-03 09:51:22,620  INFO     Memory after pass 1: 94.5 MB
+2026-03-03 09:51:22,620  INFO     Per-group sample targets:
+2026-03-03 09:51:22,620  INFO       (0, 'bgl'): sample 21,883 / 348,460  (frac=0.062799)
+2026-03-03 09:51:22,620  INFO       (0, 'hdfs'): sample 683,726 / 10,887,379  (frac=0.062800)
+2026-03-03 09:51:22,620  INFO       (1, 'bgl'): sample 276,288 / 4,399,503  (frac=0.062800)
+2026-03-03 09:51:22,620  INFO       (1, 'hdfs'): sample 18,103 / 288,250  (frac=0.062803)
+2026-03-03 09:51:22,620  INFO     Total allocated: 1,000,000
+2026-03-03 09:51:22,620  INFO     Pass 2: sampling rows ...
+2026-03-03 09:51:23,626  INFO       chunk   0 processed | collected 31,400 rows | mem 330.2 MB
+2026-03-03 09:51:28,500  INFO       chunk   5 processed | collected 188,399 rows | mem 446.9 MB
+2026-03-03 09:51:33,336  INFO       chunk  10 processed | collected 345,399 rows | mem 491.8 MB
+2026-03-03 09:51:38,164  INFO       chunk  15 processed | collected 502,399 rows | mem 528.8 MB
+2026-03-03 09:51:42,995  INFO       chunk  20 processed | collected 659,400 rows | mem 561.7 MB
+2026-03-03 09:51:47,635  INFO       chunk  25 processed | collected 816,399 rows | mem 566.8 MB
+2026-03-03 09:51:52,557  INFO       chunk  30 processed | collected 973,399 rows | mem 614.1 MB
+2026-03-03 09:51:53,749  INFO     Sampling complete. Rows collected: 1,000,000
+2026-03-03 09:51:53,749  INFO     Combining sampled chunks ...
+2026-03-03 09:51:53,768  INFO     Total sampled rows before shuffle: 1,000,000
+2026-03-03 09:51:53,768  INFO     Memory before shuffle: 555.8 MB
+2026-03-03 09:51:53,979  INFO     Saving to C:\Users\ORENS\predictive-log-anomaly-engine\data\processed\events_sample_1m.csv ...
+2026-03-03 09:51:55,609  INFO     Output saved.
+2026-03-03 09:51:55,610  INFO     Elapsed time: 41.8s
+2026-03-03 09:51:55,610  INFO     Memory after save: 696.1 MB
+2026-03-03 09:51:56,042  INFO     --- Label distribution ---
+2026-03-03 09:51:56,042  INFO       label=0: 705,609  (70.5609%)
+2026-03-03 09:51:56,042  INFO       label=1: 294,391  (29.4391%)
+2026-03-03 09:51:56,042  INFO     --- Dataset distribution ---
+2026-03-03 09:51:56,042  INFO       dataset=bgl: 298,171  (29.8171%)
+2026-03-03 09:51:56,043  INFO       dataset=hdfs: 701,829  (70.1829%)
+2026-03-03 09:51:56,043  INFO     --- Top 20 messages ---
+2026-03-03 09:51:56,043  INFO        1. [2] 081110 224547 16426 INFO dfs.DataNode$PacketResponder: Received block blk_-6502650234896412734 of si
+2026-03-03 09:51:56,043  INFO        2. [2] 081109 204637 556 INFO dfs.DataNode$PacketResponder: Received block blk_-6320089668124629180 of size
+2026-03-03 09:51:56,043  INFO        3. [2] 081110 115344 10650 INFO dfs.DataNode$PacketResponder: Received block blk_767006533341077224 of size
+2026-03-03 09:51:56,043  INFO        4. [2] 081110 111018 9813 INFO dfs.DataNode$PacketResponder: Received block blk_-6550889247426673720 of siz
+2026-03-03 09:51:56,043  INFO        5. [2] 081110 220659 18 INFO dfs.FSDataset: Deleting block blk_-9172947514522041361 file /mnt/hadoop/dfs/da
+2026-03-03 09:51:56,043  INFO        6. [2] 081109 212415 2016 INFO dfs.DataNode$PacketResponder: Received block blk_-3349975077663956198 of siz
+2026-03-03 09:51:56,043  INFO        7. [2] 081110 103630 19 INFO dfs.FSDataset: Deleting block blk_-2319428880642351841 file /mnt/hadoop/dfs/da
+2026-03-03 09:51:56,043  INFO        8. [1] - 1133448666 2005.12.01 R60-M1-NC-C:J12-U01 2005-12-01-06.51.06.840240 R60-M1-NC-C:J12-U01 RAS KERNE
+2026-03-03 09:51:56,043  INFO        9. [1] 081110 010510 30 INFO dfs.FSNamesystem: BLOCK* NameSystem.addStoredBlock: blockMap updated: 10.251.3
+2026-03-03 09:51:56,043  INFO       10. [1] 081111 075616 28 INFO dfs.FSNamesystem: BLOCK* NameSystem.delete: blk_-3584151299152942241 is added 
+2026-03-03 09:51:56,043  INFO       11. [1] 081111 052617 21200 INFO dfs.DataNode$PacketResponder: Received block blk_-3337674171004867062 of si
+2026-03-03 09:51:56,043  INFO       12. [1] 081109 220443 3266 WARN dfs.DataNode$DataXceiver: 10.251.202.134:50010:Got exception while serving b
+2026-03-03 09:51:56,043  INFO       13. [1] 081110 103315 19 INFO dfs.FSDataset: Deleting block blk_-8722912542535385865 file /mnt/hadoop/dfs/da
+2026-03-03 09:51:56,043  INFO       14. [1] - 1118772482 2005.06.14 R27-M0-N8-C:J13-U01 2005-06-14-11.08.02.821424 R27-M0-N8-C:J13-U01 RAS KERNE
+2026-03-03 09:51:56,043  INFO       15. [1] - 1118770217 2005.06.14 R27-M0-N6-C:J08-U11 2005-06-14-10.30.17.669045 R27-M0-N6-C:J08-U11 RAS KERNE
+2026-03-03 09:51:56,043  INFO       16. [1] 081109 223038 3519 WARN dfs.DataNode$DataXceiver: 10.251.39.209:50010:Got exception while serving bl
+2026-03-03 09:51:56,043  INFO       17. [1] - 1118810026 2005.06.14 R02-M1-N0-C:J12-U11 2005-06-14-21.33.46.293461 R02-M1-N0-C:J12-U11 RAS KERNE
+2026-03-03 09:51:56,043  INFO       18. [1] 081111 023245 19 INFO dfs.FSDataset: Deleting block blk_-2458797038559971394 file /mnt/hadoop/dfs/da
+2026-03-03 09:51:56,043  INFO       19. [1] 081111 030050 18256 INFO dfs.DataNode$DataXceiver: Receiving block blk_6916511691144210805 src: /10.
+2026-03-03 09:51:56,043  INFO       20. [1] - 1122139670 2005.07.23 R05-M0-NA-C:J08-U01 2005-07-23-10.27.50.232455 R05-M0-NA-C:J08-U01 RAS KERNE
+2026-03-03 09:51:56,043  INFO     Writing report to C:\Users\ORENS\predictive-log-anomaly-engine\ai_workspace\reports\stage_21_sampling_report.md ...
+2026-03-03 09:51:56,090  INFO     Report saved.

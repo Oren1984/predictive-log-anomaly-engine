@@ -1,0 +1,31 @@
+2026-03-03 14:25:18,162  INFO     ============================================================
+2026-03-03 14:25:18,162  INFO     Stage 26 V2: HDFS Supervised Model Selection
+2026-03-03 14:25:18,162  INFO     Input  : C:\Users\ORENS\predictive-log-anomaly-engine\data\intermediate\session_features_v2.csv
+2026-03-03 14:25:18,162  INFO     Memory start: 177.9 MB
+2026-03-03 14:25:18,162  INFO     ============================================================
+2026-03-03 14:25:18,162  INFO     Loading session_features_v2.csv (HDFS only) ...
+2026-03-03 14:25:28,529  INFO     HDFS sessions: 404,179  Memory: 1510.9 MB
+2026-03-03 14:25:29,050  INFO     Features: 404  |  Anomaly rate: 0.0235 (2.35%)
+2026-03-03 14:25:30,804  INFO     Split -> train=323,343 (7,592 anom)  val=40,418 (949 anom)  test=40,418 (949 anom)
+2026-03-03 14:25:30,804  INFO     Skipping LogReg-L1-C0.2 due to excessive runtime observed on this machine.
+2026-03-03 14:25:30,804  INFO     Skipping LogReg-L1-C0.5 and LogReg-L1-C1.0: liblinear L1 causes OOM on this machine at current memory baseline.
+2026-03-03 14:25:30,804  INFO     Training 2 candidate models ...
+2026-03-03 14:25:30,804  INFO       Fitting: LogReg-L2 ...
+2026-03-03 14:25:42,550  INFO       [LogReg-L2]  Val ROC=0.6604  Val PR-AUC=0.2334  fit=11.6s
+2026-03-03 14:25:42,550  INFO       Fitting: HGBC ...
+2026-03-03 14:26:06,330  INFO       [HGBC]  Val ROC=0.6555  Val PR-AUC=0.1845  fit=23.3s
+2026-03-03 14:26:06,330  INFO     Best model by Val PR-AUC: LogReg-L2  (PR-AUC=0.2334)
+2026-03-03 14:26:06,330  INFO     Finding best F1 threshold on val for LogReg-L2 ...
+2026-03-03 14:26:07,509  INFO     Best F1 threshold (val): 0.71259  (val F1=0.3037)
+2026-03-03 14:26:07,509  INFO     Evaluating best model on test set ...
+2026-03-03 14:26:07,660  INFO     Test [t=0.5]    ROC=0.6624  PR=0.1864  F1=0.0862  P=0.0475  R=0.4594
+2026-03-03 14:26:07,660  INFO     Test [t=0.7126] ROC=0.6624  PR=0.1864  F1=0.2522  P=0.4261  R=0.1791
+2026-03-03 14:26:07,660  INFO     Scoring all HDFS sessions with best model ...
+2026-03-03 14:26:09,220  INFO     Scores saved: C:\Users\ORENS\predictive-log-anomaly-engine\data\intermediate\hdfs_supervised_scores_v2.csv  (404,179 rows)
+2026-03-03 14:26:09,221  INFO     Model saved: C:\Users\ORENS\predictive-log-anomaly-engine\data\models\hdfs_supervised_best_v2.pkl  (13.6 KB)
+2026-03-03 14:26:09,222  INFO     Generating plots ...
+2026-03-03 14:26:09,410  INFO     Saved: roc_curve_hdfs_v2.png
+2026-03-03 14:26:09,498  INFO     Saved: pr_curve_hdfs_v2.png
+2026-03-03 14:26:09,583  INFO     Saved: confusion_hdfs_v2.png
+2026-03-03 14:26:09,583  INFO     Total elapsed: 51.4s  |  Peak memory: 3417.5 MB
+2026-03-03 14:26:09,584  INFO     Report saved: C:\Users\ORENS\predictive-log-anomaly-engine\ai_workspace\reports\stage_26_hdfs_supervised_report_v2.md

@@ -1,0 +1,19 @@
+2026-03-03 15:17:06,865 [INFO] ============================================================
+2026-03-03 15:17:06,865 [INFO] Stage 02 | mode=full
+2026-03-03 15:17:06,865 [INFO] Memory baseline: 81.8 MB
+2026-03-03 15:17:06,900 [INFO] Loaded 7833 templates
+2026-03-03 15:17:06,922 [INFO] Vocab size (incl. PAD+UNK): 7835
+2026-03-03 15:17:06,934 [INFO] Wrote templates.json  entries=7833  size=1541328 B
+2026-03-03 15:17:06,944 [INFO] Wrote vocab.json  entries=7835  size=1541368 B
+2026-03-03 15:17:06,944 [INFO] PAD token: vocab['0']=<PAD>
+2026-03-03 15:17:06,944 [INFO] UNK token: vocab['1']=<UNK>
+2026-03-03 15:17:06,945 [INFO] Reading events_with_templates.csv ...
+2026-03-03 15:17:08,073 [INFO] Read CSV: 1000000 rows x 5 cols  (mem=186.8 MB)
+2026-03-03 15:17:08,256 [INFO] Encoded 1000000 token_ids  (mem=192.4 MB)
+2026-03-03 15:17:08,471 [INFO] Wrote events_tokenized.parquet
+2026-03-03 15:17:08,471 [INFO]   rows=1000000  cols=['timestamp', 'service', 'session_id', 'template_id', 'token_id', 'label']  size=17356301 B (16.6 MB)
+2026-03-03 15:17:08,556 [INFO] Parquet validation: row count OK, no NaN token_ids
+2026-03-03 15:17:08,556 [INFO] ------------------------------------------------------------
+2026-03-03 15:17:08,556 [INFO] Stage 02 COMPLETE | elapsed=1.7s | peak_mem=200.7 MB
+2026-03-03 15:17:08,556 [INFO] Log written to: C:\Users\ORENS\predictive-log-anomaly-engine\ai_workspace\logs\stage_02_templates_full.log
+2026-03-03 15:17:08,556 [INFO] ============================================================

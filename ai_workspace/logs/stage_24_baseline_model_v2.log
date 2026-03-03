@@ -1,0 +1,24 @@
+2026-03-03 12:55:06,438  INFO     ============================================================
+2026-03-03 12:55:06,438  INFO     Stage 24 V2: Baseline Anomaly Detection Model (Enhanced)
+2026-03-03 12:55:06,438  INFO     Input  : C:\Users\ORENS\predictive-log-anomaly-engine\data\intermediate\session_features_v2.csv
+2026-03-03 12:55:06,438  INFO     Memory start: 153.5 MB
+2026-03-03 12:55:06,438  INFO     ============================================================
+2026-03-03 12:55:06,439  INFO     Loading session_features_v2.csv ...
+2026-03-03 12:55:13,654  INFO     Loaded 495,405 sessions.  Memory: 1759.8 MB
+2026-03-03 12:55:14,757  INFO     Feature columns : 404
+2026-03-03 12:55:14,758  INFO     Anomaly rate    : 0.1908 (19.08%)
+2026-03-03 12:55:14,758  INFO     X shape         : (495405, 404)  |  Memory: 2524.1 MB
+2026-03-03 12:55:14,758  INFO     Training IsolationForest (n_estimators=300, random_state=42) ...
+2026-03-03 12:55:15,596  INFO     Training done in 0.8s.  Memory: 2525.7 MB
+2026-03-03 12:55:15,596  INFO     Computing anomaly scores ...
+2026-03-03 12:55:19,154  INFO     Score range: [0.29739, 0.44266]  mean=0.31899  median=0.31819
+2026-03-03 12:55:19,154  INFO     Finding overall F1-optimal threshold (300 candidates) ...
+2026-03-03 12:55:26,099  INFO     Overall threshold=0.30665  F1=0.3846  P=0.2537  R=0.7948  pred_anom=59.76%
+2026-03-03 12:55:26,100  INFO     Finding per-dataset F1-optimal thresholds ...
+2026-03-03 12:55:27,346  INFO       [bgl] threshold=0.29739  F1=0.9648  P=0.9319  R=1.0000  pred_anom=100.00%
+2026-03-03 12:55:32,849  INFO       [hdfs] threshold=0.30664  F1=0.0466  P=0.0243  R=0.5686  pred_anom=54.95%
+2026-03-03 12:55:32,862  INFO     pred_by_dataset anomalies: 313,306 (63.24%)
+2026-03-03 12:55:32,868  INFO     Model saved: C:\Users\ORENS\predictive-log-anomaly-engine\data\models\isolation_forest_v2.pkl  (1826.6 KB)
+2026-03-03 12:55:33,354  INFO     Scores saved: C:\Users\ORENS\predictive-log-anomaly-engine\data\intermediate\session_scores_v2.csv  (495,405 rows)
+2026-03-03 12:55:33,355  INFO     Total elapsed: 26.9s  |  Peak memory: 2528.5 MB
+2026-03-03 12:55:33,431  INFO     Report saved: C:\Users\ORENS\predictive-log-anomaly-engine\ai_workspace\reports\stage_24_model_report_v2.md
