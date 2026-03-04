@@ -1,3 +1,17 @@
+# src/parsing/template_miner.py
+
+# Purpose: Define the TemplateMiner class, which wraps pre-computed 
+# template mining outputs and provides methods to load from CSV artifacts or fit from scratch.
+
+# Input: - TemplateMiner: A class that can load template mappings 
+# from CSV files or fit a simple template mining algorithm on raw log messages.
+
+# Output: - TemplateMiner: Provides methods to transform log messages 
+# into template IDs based on pre-computed mappings or fitted templates.
+
+# Used by: Other stages of the pipeline that need to convert raw log messages 
+# into template IDs for further processing, such as tokenization and modeling.
+
 """Stage 2 — Parsing: template miner wrapper over existing CSV artifacts."""
 from pathlib import Path
 from typing import Optional

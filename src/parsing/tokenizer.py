@@ -1,3 +1,20 @@
+# src/parsing/tokenizer.py
+
+# Purpose: Define the EventTokenizer class, which encodes template IDs
+# into compact integer token IDs and provides methods for encoding and decoding.
+
+# Input: - EventTokenizer: A class that can load template mappings 
+# from CSV files and encode template IDs into token IDs, 
+# as well as decode token IDs back to template text.
+
+# Output: - EventTokenizer: Provides methods to transform template IDs 
+# into token IDs for use in modeling, 
+# and to decode token IDs back into human-readable template text.
+
+# Used by: Other stages of the pipeline that need to convert template IDs into token 
+# IDs for input into machine learning models, 
+# and to interpret model outputs back into template text.
+
 """Stage 2 — Parsing: EventTokenizer using template vocabulary."""
 from pathlib import Path
 from typing import Optional

@@ -1,3 +1,20 @@
+# src/modeling/transformer/scorer.py
+
+# Purpose: Define the AnomalyScorer class, which uses a trained NextTokenTransformerModel 
+# to score sequences based on their negative log-likelihood (NLL).
+
+# Input: The AnomalyScorer takes a list of Sequence objects as input to the score method. 
+# Each Sequence contains a list of token IDs. 
+# The scorer computes the NLL for each token in the sequence based on the predictions from the transformer model.
+
+# Output: A numpy array of anomaly scores, one per sequence. Higher scores indicate more anomalous sequences.
+
+# Used by: The AnomalyScorer class is used after training a NextTokenTransformerModel
+# to evaluate new sequences for anomaly detection. 
+# It can be used in a pipeline where sequences are scored and then classified 
+# as anomalous or normal based on a threshold. 
+# The class also provides methods to set and save the threshold for classification,
+
 """Stage 4B — Transformer: NLL-based anomaly scorer."""
 from __future__ import annotations
 

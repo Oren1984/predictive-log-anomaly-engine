@@ -1,6 +1,6 @@
 # Stage 31 — Runtime Calibration Report
 
-_Generated: 2026-03-03T18:57:20.144011+00:00_
+_Generated: 2026-03-04T15:48:31.794720+00:00_
 
 ## Command Used
 
@@ -19,7 +19,7 @@ python scripts/stage_05_runtime_calibrate.py --mode demo --model ensemble --n-ev
 | n_events | 2,000 |
 | n_windows (per model) | 192 |
 | target_alert_rate | 0.005 |
-| total elapsed (s) | 5.76 |
+| total elapsed (s) | 6.04 |
 
 ## Calibration Method
 

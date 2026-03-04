@@ -1,3 +1,13 @@
+# test/unit/test_calibrator.py
+
+# Purpose: Unit tests for the ThresholdCalibrator class to verify fitting, prediction, and persistence.
+
+# Input: None (test code only)
+
+# Output: Test results (pass/fail) when run with pytest.
+ 
+# Used by: N/A (these are unit tests for the ThresholdCalibrator class)
+
 """Unit tests for ThresholdCalibrator."""
 import sys
 import tempfile

@@ -1,3 +1,14 @@
+# test/unit/test_runtime_calibration.py
+
+# Purpose: Unit tests for the runtime calibration script to verify that it produces expected artifacts and outputs.
+
+# Input: None (test code only)
+
+# Output: Test results (pass/fail) when run with pytest.
+
+# Used by: N/A (these are unit tests for the runtime calibration script, indirectly used by the script itself and its outputs)
+
+
 """Unit tests for Stage 31 runtime calibration script."""
 from __future__ import annotations
 
@@ -63,6 +74,7 @@ def _import_calibrate():
 # Tests
 # ---------------------------------------------------------------------------
 
+@pytest.mark.slow
 @needs_artifacts
 @needs_transformer
 class TestRuntimeCalibration:

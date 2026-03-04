@@ -1,3 +1,22 @@
+# src/runtime/sequence_buffer.py
+
+# Purpose: Define the SequenceBuffer class, which maintains a rolling window of 
+# 
+# log events for each stream key (service:session_id) during runtime inference. 
+# The SequenceBuffer allows the InferenceEngine to determine when to emit 
+# a window of events for scoring and to construct the Sequence objects 
+# that are fed into the anomaly detection models.
+
+# Input: - window_size: The number of events that constitute a full window for scoring.
+
+# Output: - SequenceBuffer: An instance of the SequenceBuffer class that can be used to ingest log events, 
+# determine when to emit windows for scoring, and construct Sequence objects for the InferenceEngine.
+
+# Used by: The SequenceBuffer class is used by the InferenceEngine in the runtime stage 
+# to maintain rolling windows of log events for each stream key (service:session_id). 
+# It allows the InferenceEngine to determine when to emit a window of events for scoring 
+# and to construct the Sequence objects that are fed into the anomaly detection models.
+
 """Stage 5 — Runtime: rolling token-window buffer."""
 from __future__ import annotations
 

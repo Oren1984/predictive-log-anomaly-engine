@@ -1,3 +1,15 @@
+# docker-compose.yml
+
+# Purpose: Docker Compose configuration for the predictive-log-anomaly-engine project,
+# defining services for the API, Prometheus, and Grafana.
+
+# Input: Docker images, ports, environment variables, volumes, and health checks for the services.
+
+# Output: A multi-container Docker application that can be easily started and managed using Docker Compose.
+
+# Used by: Developers and operators of the predictive-log-anomaly-engine project 
+# to run the application and its monitoring stack in a containerized environment.
+
 services:
 
   api:
@@ -15,6 +27,9 @@ services:
       WINDOW_SIZE: "5"
       STRIDE: "1"
       ALERT_COOLDOWN_SECONDS: "0"
+      # Warmup: ingest 75 synthetic events on startup so the demo is alive immediately.
+      DEMO_WARMUP_ENABLED: "true"
+      DEMO_WARMUP_EVENTS: "75"
     volumes:
       # Mount local model artifacts so the container runs with real models.
       # If these directories don't exist the mounts are silently empty.
@@ -27,6 +42,7 @@ services:
       retries: 5
       start_period: 30s
 
+  # Prometheus configuration
   prometheus:
     image: prom/prometheus:v2.51.0
     ports:
@@ -39,6 +55,7 @@ services:
     depends_on:
       - api
 
+  # Grafana configuration
   grafana:
     image: grafana/grafana:10.4.2
     ports:

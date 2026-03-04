@@ -1,3 +1,16 @@
+# .dockerignore
+
+# Purpose: Exclude unnecessary files and directories from the Docker build context. 
+# This helps to reduce the build time and the size of the resulting 
+# Docker image by only including the files that are necessary for the application to run.
+
+# Input: The .dockerignore file is used by Docker to determine which files and directories to exclude when building an image.
+
+# Output: A Docker image that does not include the files and directories specified in this 
+# .dockerignore file, resulting in a smaller and more efficient image.
+
+# Used by: Docker
+
 # Git
 .git
 .gitignore

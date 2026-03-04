@@ -1,3 +1,13 @@
+# tests/integration/test_smoke_api.py
+
+# Purpose: Smoke tests for the API endpoints to ensure basic functionality.
+
+# Input: None (test code only)
+
+# Output: Test results (pass/fail) when run with pytest.
+
+# Used by: N/A (these are integration tests for the API)
+
 """
 Stage 08 integration smoke tests.
 
@@ -12,6 +22,8 @@ from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
+
+pytestmark = pytest.mark.integration
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
@@ -170,3 +182,50 @@ def test_no_anomaly_no_alert(api):
     ).json()
     assert body["window_emitted"] is True
     assert body["alert"] is None
+
+
+# ---------------------------------------------------------------------------
+# Stage 7.1 — Demo UI smoke tests
+# ---------------------------------------------------------------------------
+
+def test_ui_index_returns_200(api):
+    """GET / must return the HTML demo page."""
+    client, _ = api
+    resp = client.get("/")
+    assert resp.status_code == 200
+    assert "text/html" in resp.headers["content-type"]
+
+
+def test_ui_index_contains_expected_sections(api):
+    """The HTML page must include all three panel identifiers."""
+    client, _ = api
+    body = client.get("/").text
+    for section in ("panel-ingest", "panel-alerts", "panel-rag"):
+        assert section in body, f"Missing section: {section}"
+
+
+def test_query_returns_200(api):
+    """POST /query must return HTTP 200."""
+    client, _ = api
+    resp = client.post("/query", json={"question": "How do alerts work?"})
+    assert resp.status_code == 200
+
+
+def test_query_response_has_answer_and_sources(api):
+    """POST /query response must contain 'answer' (str) and 'sources' (list)."""
+    client, _ = api
+    data = client.post("/query", json={"question": "What model is used?"}).json()
+    assert "answer" in data
+    assert isinstance(data["answer"], str) and len(data["answer"]) > 0
+    assert "sources" in data
+    assert isinstance(data["sources"], list)
+
+
+def test_query_sources_have_required_fields(api):
+    """Each source document must have id, score, and snippet."""
+    client, _ = api
+    data = client.post("/query", json={"question": "Tell me about the dataset"}).json()
+    for src in data["sources"]:
+        assert "id" in src
+        assert "score" in src
+        assert "snippet" in src

@@ -1,3 +1,5 @@
+# ai_workspace/stage_22_template_mining/run_template_mining.py
+
 """
 Stage 22 - Log Template Mining
 ================================

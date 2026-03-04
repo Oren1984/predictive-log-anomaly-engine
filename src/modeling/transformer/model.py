@@ -1,3 +1,21 @@
+# src/modeling/transformer/model.py
+
+# Purpose: Define the NextTokenTransformerModel class, 
+# which implements a GPT-style causal transformer architecture for next-token prediction.
+
+# Input: Token IDs of shape (B, T), where B is the batch size and T is the sequence length.
+
+# Output: Logits of shape (B, T, vocab_size), representing the predicted 
+# next-token probabilities for each position in the sequence.
+
+# Used by: The NextTokenTransformerModel class is used by the Trainer class 
+# during training to compute the logits for the input sequences, 
+# which are then used to calculate the loss and update the model parameters. 
+# It is also used by the AnomalyScorer class to compute the log-probabilities 
+# of the next tokens when scoring sequences for anomaly detection. 
+# The model can be saved and loaded using the provided save and load methods, 
+# allowing for persistence and reuse of trained models.
+
 """Stage 4B — Transformer: GPT-style causal next-token model."""
 from __future__ import annotations
 

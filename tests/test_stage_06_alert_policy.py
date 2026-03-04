@@ -1,3 +1,15 @@
+# test/test_stage_06_alert_policy.py
+
+# Purpose: Tests for AlertPolicy: severity classification, should_alert, risk_to_alert.
+
+# Input: None (test code only)
+
+# Output: Test results (pass/fail) when run with pytest.
+
+# Used by: N/A (these are tests for AlertPolicy, 
+# indirectly used by the alerting pipeline 
+# and any downstream components that consume alerts)
+
 """Tests for AlertPolicy: severity classification, should_alert, risk_to_alert."""
 from __future__ import annotations
 

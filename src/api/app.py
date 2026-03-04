@@ -1,6 +1,25 @@
+# src/api/app.py
+
+# Purpose: Implement the main application factory for the API using FastAPI. 
+# This includes setting up shared state (like the inference pipeline and metrics registry), 
+# configuring middleware (for authentication and metrics), 
+# and including the API routes.
+
+# Input: The create_app function is the main application factory for the API.
+# It initializes the FastAPI application, sets up shared state 
+# (like the inference pipeline and metrics registry), 
+# and configures middleware and routes.
+
+# Output: The create_app function returns a configured FastAPI application instance, 
+# ready to be run by an ASGI server (e.g., Uvicorn).
+
+# Used by: The create_app function is used in the main entry point of the application 
+# (e.g., run.py) to create the FastAPI app instance.
+
 """Stage 7 — API: FastAPI application factory."""
 from __future__ import annotations
 
+import asyncio
 import logging
 from contextlib import asynccontextmanager
 from typing import Optional
@@ -13,14 +32,48 @@ from ..security.auth import AuthMiddleware
 from .pipeline import Pipeline
 from .routes import router
 from .settings import Settings
+from .ui import ui_router
 
 logger = logging.getLogger(__name__)
 
 
+async def _warmup_task(pipeline, n_events: int, interval_seconds: float) -> None:
+    """
+    Background task: ingest a small synthetic batch through the pipeline.
+
+    Runs once (interval_seconds <= 0) or periodically.  Each call ingests
+    n_events events, then logs a single summary line.
+    """
+    await asyncio.sleep(2)  # let uvicorn finish binding before we start
+    while True:
+        total = 0
+        alerts = 0
+        for i in range(n_events):
+            event = {
+                "service": "demo",
+                "token_id": (abs(hash(f"warmup-{i}")) % 7833) + 2,
+                "session_id": "warmup-session",
+                "timestamp": 0.0,
+                "label": 0,
+            }
+            try:
+                result = pipeline.process_event(event)
+                total += 1
+                if result.get("alert"):
+                    alerts += 1
+            except Exception as exc:
+                logger.warning("DEMO_WARMUP: event error: %s", exc)
+        logger.info("DEMO_WARMUP: ingested %d events, alerts=%d", total, alerts)
+        if interval_seconds <= 0:
+            break
+        await asyncio.sleep(interval_seconds)
+
+
 @asynccontextmanager
 async def _lifespan(app: FastAPI):
-    """Load ML models on startup; nothing to clean up on shutdown."""
+    """Load ML models on startup; optionally run warmup traffic; clean up on shutdown."""
     pipeline: Pipeline = app.state.pipeline
+    cfg: Settings = app.state.settings
     logger.info("API startup: loading inference pipeline ...")
     try:
         pipeline.load_models()
@@ -28,7 +81,26 @@ async def _lifespan(app: FastAPI):
     except Exception as exc:
         logger.error("API startup: pipeline load failed: %s", exc)
         # Continue anyway so /health can report unhealthy
+
+    warmup = None
+    if cfg.demo_warmup_enabled:
+        logger.info(
+            "API startup: scheduling demo warmup (%d events, interval=%.0fs)",
+            cfg.demo_warmup_events,
+            cfg.demo_warmup_interval_seconds,
+        )
+        warmup = asyncio.create_task(
+            _warmup_task(
+                pipeline,
+                cfg.demo_warmup_events,
+                cfg.demo_warmup_interval_seconds,
+            )
+        )
+
     yield
+
+    if warmup and not warmup.done():
+        warmup.cancel()
     logger.info("API shutdown")
 
 
@@ -98,5 +170,6 @@ def create_app(
     # Routes
     # ------------------------------------------------------------------
     app.include_router(router)
+    app.include_router(ui_router)
 
     return app

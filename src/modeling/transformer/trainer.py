@@ -1,3 +1,16 @@
+# src/modeling/transformer/trainer.py
+
+# Purpose: Define the Trainer class, which handles the training loop for a NextTokenTransformerModel.
+
+# Input: The Trainer takes a TransformerConfig object and a device string ("cpu" or "cuda") as input.
+
+# Output: The Trainer class provides a train method that takes in training and validation sequences, 
+# and an optional save path for the model. 
+# It runs the training loop with early stopping based on validation loss.
+
+# Used by: The Trainer class is used to train a NextTokenTransformerModel on a list of Sequence objects.
+
+
 """Stage 4B — Transformer: training loop."""
 from __future__ import annotations
 

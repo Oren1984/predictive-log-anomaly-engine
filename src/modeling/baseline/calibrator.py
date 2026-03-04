@@ -1,3 +1,24 @@
+# src/modeling/baseline/calibrator.py
+
+# Purpose: This module defines the `ThresholdCalibrator` class, 
+# which is responsible for finding the optimal decision threshold that maximizes 
+# the F1 score on a validation set of anomaly scores and corresponding labels. 
+# The class provides methods for fitting the model to the data, 
+# making predictions based on the calibrated threshold, 
+# and saving/loading the calibrator state to/from a file.
+
+# Input: - `scores`: A 1-D numpy array of anomaly scores, where higher values indicate more anomalous instances.
+#        - `labels`: A 1-D numpy array of integer labels, where 0 represents normal instances and 1 represents anomalies.
+
+# Output: - The `fit` method returns the `ThresholdCalibrator` instance with the optimal threshold and best F1 score stored as attributes.
+#         - The `predict` method returns a 1-D numpy array of integer predictions (0 for normal, 1 for anomaly) based on the calibrated threshold.
+#         - The `save` method writes the calibrator's state (threshold, best F1 score, and number of thresholds) to a JSON file.
+#         - The `load` class method reads the calibrator's state from a JSON file and returns a `ThresholdCalibrator` instance with the loaded state.
+
+# Used by: Other modules in the project that require threshold calibration for anomaly detection, 
+# such as training scripts that need to calibrate the threshold on a validation set, 
+# or evaluation scripts that need to apply the calibrated threshold to test data.
+
 """Stage 4A — Baseline: threshold calibrator (F1-optimal scan)."""
 from __future__ import annotations
 

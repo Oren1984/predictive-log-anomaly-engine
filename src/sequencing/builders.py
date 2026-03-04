@@ -1,3 +1,20 @@
+# src/sequencing/builders.py
+
+# Purpose: Defines concrete implementations of the SequenceBuilder interface for building sequences from event data.
+# It includes a SlidingWindowSequenceBuilder for creating fixed-length overlapping sequences and 
+# a SessionSequenceBuilder for creating sequences based on session boundaries.
+
+# Input: - SequenceBuilder: an abstract base class that defines the interface for building sequences.
+#        - SlidingWindowSequenceBuilder: a class that implements SequenceBuilder to create sequences by sliding a fixed-size window over event data.
+#        - SessionSequenceBuilder: a class that implements SequenceBuilder to create sequences based on pre-computed session data, 
+#          parsing comma-separated template ID sequences.
+
+# Output: - The concrete implementations of SequenceBuilder can be used to build sequences from event data, 
+#           which can then be used for model training and evaluation.
+
+# Used by: - The main application to build sequences from event data, which are then split into training, 
+#            validation, and test sets for model training and evaluation.
+
 """Stage 3 — Sequencing: sequence builder implementations."""
 from abc import ABC, abstractmethod
 from pathlib import Path

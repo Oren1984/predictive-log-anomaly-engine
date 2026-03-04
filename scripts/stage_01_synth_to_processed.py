@@ -1,3 +1,18 @@
+# scripts/stage_01_synth_to_processed.py
+
+# Purpose: Copy events_synth.parquet to data/processed/, sorted by timestamp. 
+# Ensures the synthetic parquet matches the same schema conventions used by the existing pipeline 
+# (columns: timestamp, service, level, message, meta, label) and is sorted by timestamp. 
+# Does NOT modify data/processed/events_tokenized.parquet or any other existing file.
+
+# Input: Path to the synthetic parquet file (default: data/synth/events_synth.parquet)
+
+# Output: Path to the processed parquet file (default: data/processed/events_synth.parquet)
+
+# Used by: This script can be run independently to prepare synthetic data for testing the anomaly detection pipeline.
+# It is not directly used by other scripts but provides a processed dataset
+# that can be used in place of real data for stages 02 and beyond.
+
 """
 Stage 01 -- Synthetic: copy events_synth.parquet to data/processed/, sorted by timestamp.
 

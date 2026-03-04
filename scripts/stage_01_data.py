@@ -1,3 +1,17 @@
+# scripts/stage_01_data.py
+
+# Purpose: This script is responsible for the first stage of the anomaly detection pipeline,
+# which involves loading, validating, and summarizing the raw unified dataset.
+# It checks for the presence of the expected schema file, loads the raw data using a custom data loader,
+# validates the required columns, and provides a summary of the dataset including memory usage and label distribution.
+
+# Input: The script takes an optional command-line argument for the mode of operation (e.g., "demo" for a faster run using a subset of the data).
+
+# Output: The script outputs logs that include information about the dataset, such as the number of rows and columns,
+# memory usage, label distribution, and any issues encountered during validation.
+
+# Used by: This script is used by the one-command pipeline script (scripts/run_0_4.py) to execute stage 01 of the anomaly detection pipeline.
+
 """
 Stage 01 — Data: validate and summarise the raw unified dataset.
 

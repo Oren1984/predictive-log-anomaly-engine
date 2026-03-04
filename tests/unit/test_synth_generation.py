@@ -1,3 +1,17 @@
+# test/unit/test_synth_generation.py
+
+# Purpose: Unit tests for synthetic data generation pipeline to verify 
+# that it produces expected outputs and adheres to the canonical schema.
+
+# Input: None (test code only)
+
+# Output: Test results (pass/fail) when run with pytest.
+
+# Used by: N/A (these are unit tests for the synthetic data generation pipeline, 
+# indirectly used by the generation script and
+# any downstream models that consume the synthetic data)
+
+
 """
 Unit tests for synthetic data generation pipeline.
 

@@ -1,3 +1,17 @@
+# test/unit/test_tokenizer.py
+
+# Purpose: Unit tests for EventTokenizer to verify
+# correct encoding/decoding behavior, vocab handling, and edge cases.
+
+# Input: None (test code only)
+
+# Output: Test results (pass/fail) when run with pytest.
+
+# Used by: N/A (these are unit tests for the EventTokenizer, 
+# indirectly used by the tokenization script and
+# any downstream models that consume tokenized data)
+
+
 """Unit tests for EventTokenizer."""
 import sys
 from pathlib import Path

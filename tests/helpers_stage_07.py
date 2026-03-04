@@ -1,3 +1,13 @@
+# tests/helpers_stage_07.py
+
+# Purpose: Shared test helpers for Stage 7 tests.
+
+# Input: None (test code only)
+
+# Output: Test results (pass/fail) when run with pytest.
+
+# Used by: N/A (these are test helpers, indirectly used by Stage 7 tests)
+
 """
 Shared test helpers for Stage 7 tests.
 

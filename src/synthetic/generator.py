@@ -1,3 +1,24 @@
+# src/synthetic/generator.py
+
+# Purpose: Defines the SyntheticLogGenerator class, which generates synthetic 
+# log events based on defined failure patterns and scenarios.
+# The generator takes a list of FailurePattern instances and a random seed, 
+# and produces a list of LogEvent objects by running the patterns through scenario definitions.
+# It also includes a method for converting the generated LogEvent objects 
+# into a pandas DataFrame format that matches the expected schema for downstream processing.
+
+# Input: - patterns: a list of FailurePattern instances that define how to emit log events for different failure scenarios.
+#        - seed: a master random seed for reproducibility, which is used to derive 
+#                per-scenario seeds for independent reproducibility of scenarios.
+#        - n_events: the number of log events to generate for a given scenario.
+
+# Output: - The generate method returns a list of LogEvent objects in chronological order, 
+#           which can then be converted to a DataFrame using the events_to_dataframe method for further processing,
+#           such as building sequences and splitting datasets for model training and evaluation.
+
+# Used by: - The main application to generate synthetic log data for training and evaluating models,
+#            as well as for testing and demonstration purposes.
+
 """Stage 1 — Synthetic: log event generator."""
 from __future__ import annotations
 

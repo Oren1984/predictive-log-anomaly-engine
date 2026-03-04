@@ -1,3 +1,20 @@
+# src/observability/metrics.py
+
+# Purpose: Define the MetricsRegistry and MetricsMiddleware classes for 
+# collecting and exposing Prometheus metrics related to the API service.
+
+# Input: The MetricsRegistry class takes an optional CollectorRegistry instance.
+#        The MetricsMiddleware class takes no input but relies on 
+#        a MetricsRegistry instance being available in the app state.
+
+# Output: The MetricsRegistry class provides methods to generate Prometheus metrics in text format.
+#         The MetricsMiddleware class records HTTP request counts and latency for every route.
+
+
+# Used by: This module is used by the API service to collect and expose Prometheus metrics.
+# By integrating MetricsRegistry and MetricsMiddleware, the API service can monitor
+# key performance indicators such as request counts, latency, and error rates.
+
 """Stage 7 — Observability: Prometheus MetricsRegistry + MetricsMiddleware."""
 from __future__ import annotations
 

@@ -1,3 +1,18 @@
+# src/observability/logging.py
+
+# Purpose: Define a helper function to configure logging for the API service,
+# ensuring that all log messages have a consistent format and are output to stdout.
+
+# Input: The configure_logging function takes an optional log level as input (default is "INFO").
+
+# Output: The function configures the root logger to use a specific format for log messages,
+# which includes the timestamp, log level, logger name, and message.
+
+# Used by: This function is used by the API service and any other components that require logging.
+# By calling configure_logging at the start of the application, 
+# all log messages will be formatted consistently and will be output to stdout, 
+# making it easier to monitor and debug the application.
+
 """Stage 7 — Observability: structured logging helpers."""
 from __future__ import annotations
 

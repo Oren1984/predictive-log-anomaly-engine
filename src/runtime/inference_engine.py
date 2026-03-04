@@ -1,3 +1,26 @@
+# src/runtime/inference_engine.py
+
+# Purpose: Implement the InferenceEngine class responsible for orchestrating the rolling buffer,
+# model scoring, and thresholding for live log streams.
+# This includes loading necessary artifacts,
+# scoring sequences using the baseline and transformer models,
+# applying decision thresholds,
+# and building structured RiskResult objects for emitted windows.
+
+# Input: - InferenceEngine: A class that manages the inference process for log data, 
+#          including buffering, scoring, and thresholding.
+#        - load_artifacts: A method to load model artifacts, vocabularies, and thresholds from disk.
+#        - ingest: A method to feed log events into the buffer and trigger scoring when appropriate.
+#        - score_baseline: A method to score a sequence using the baseline model.
+
+# Output: - InferenceEngine: An instance of the InferenceEngine class that 
+#           can be used to perform inference on log data streams.
+#         - RiskResult: Structured results of anomaly scoring for emitted windows.
+
+# Used by: Other components of the runtime stage that need to perform inference on log data, 
+# such as the main application loop that feeds log events into the InferenceEngine 
+# and processes the resulting RiskResults for alerting or further analysis.
+
 """Stage 5 — Runtime: inference engine (buffer + model scoring + thresholding)."""
 from __future__ import annotations
 

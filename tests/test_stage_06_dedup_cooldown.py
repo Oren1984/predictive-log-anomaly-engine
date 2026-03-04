@@ -1,3 +1,15 @@
+# test/test_stage_06_dedup_cooldown.py
+
+# Purpose: Tests for AlertManager deduplication and cooldown logic.
+
+# Input: None (test code only)
+
+# Output: Test results (pass/fail) when run with pytest.
+
+# Used by: N/A (these are tests for AlertManager,
+# indirectly used by the alerting pipeline)
+
+
 """Tests for AlertManager deduplication and cooldown logic."""
 from __future__ import annotations
 

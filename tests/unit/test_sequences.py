@@ -1,3 +1,18 @@
+# test/unit/test_sequences.py
+
+# Purpose: Unit tests for the sequence building logic, 
+# including SlidingWindowSequenceBuilder, 
+# SessionSequenceBuilder, and DatasetSplitter.
+
+# Input: None (test code only)
+
+# Output: Test results (pass/fail) when run with pytest.
+
+# Used by: N/A (these are unit tests for the sequence building logic, 
+# indirectly used by the sequence building scripts 
+# and any downstream models that consume the sequences).
+
+
 """Unit tests for Sequence builders and DatasetSplitter."""
 import sys
 from pathlib import Path

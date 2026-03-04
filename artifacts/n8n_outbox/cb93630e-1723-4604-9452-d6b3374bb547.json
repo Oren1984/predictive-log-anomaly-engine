@@ -1,0 +1,28 @@
+{
+  "alert_id": "cb93630e-1723-4604-9452-d6b3374bb547",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=5079: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO Kernel detected <NUM> integer alignment exceptions...",
+      "tid=1122: - <HEX> <DATE> <NODE> <TS> <NODE> NULL HARDWARE WARNING PrepareForService is being done on this Midp...",
+      "tid=5312: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO ciod: Received signal <NUM>, code=<NUM>, errno=<NU...",
+      "tid=5444: - <HEX> <DATE> NULL <TS> NULL RAS MMCS INFO idoproxydb has been started: $Name: V1R1M0_246_2005 $ In...",
+      "tid=3990: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x1ecde480, mask 0x04"
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 39
+  }
+}

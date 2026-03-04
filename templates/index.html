@@ -1,0 +1,498 @@
+<!--
+File: templates/index.html
+
+Purpose:
+    Demo UI for the Predictive Log Anomaly Engine.
+    Provides three panels:
+    - Ingest: send log events to the backend
+    - Alerts: display detected alerts
+    - RAG Ask: ask questions using the RAG retrieval system
+
+Input:
+    User interactions from the browser UI.
+
+Output:
+    Visual display of alerts, query responses, and ingestion status.
+
+Used by:
+    FastAPI application serving the demo interface.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Predictive Log Anomaly Engine — Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      min-height: 100vh;
+    }
+    /* --- Header --- */
+    header {
+      background: #1e293b;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #334155;
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+    }
+    header h1 { font-size: 1.15rem; color: #38bdf8; letter-spacing: 0.04em; }
+    header span { font-size: 0.75rem; color: #475569; }
+    /* --- Tabs --- */
+    .tabs {
+      display: flex;
+      background: #1e293b;
+      border-bottom: 1px solid #334155;
+      padding: 0 1rem;
+    }
+    .tab {
+      padding: 0.75rem 1.25rem;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #64748b;
+      border-bottom: 2px solid transparent;
+      user-select: none;
+      transition: color 0.15s;
+    }
+    .tab.active  { color: #38bdf8; border-bottom-color: #38bdf8; }
+    .tab:hover:not(.active) { color: #cbd5e1; }
+    /* --- Panels --- */
+    .panel { display: none; padding: 1.5rem 2rem; max-width: 960px; }
+    .panel.active { display: block; }
+    /* --- Card --- */
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 0.5rem;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .card-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+    /* --- Form elements --- */
+    label { font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 0.35rem; margin-top: 0.85rem; }
+    label:first-child { margin-top: 0; }
+    textarea, input[type="text"] {
+      width: 100%;
+      background: #0f172a;
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      border-radius: 0.375rem;
+      padding: 0.5rem 0.65rem;
+      font-family: ui-monospace, monospace;
+      font-size: 0.8rem;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    textarea:focus, input[type="text"]:focus { border-color: #38bdf8; }
+    textarea { min-height: 110px; resize: vertical; }
+    .hint { font-size: 0.72rem; color: #475569; margin-top: 0.3rem; }
+    /* --- Buttons --- */
+    .btn-row { display: flex; gap: 0.65rem; align-items: center; margin-top: 0.85rem; flex-wrap: wrap; }
+    button {
+      background: #0369a1;
+      color: #fff;
+      border: none;
+      padding: 0.45rem 1.1rem;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: background 0.15s;
+    }
+    button:hover:not(:disabled) { background: #0284c7; }
+    button:disabled { background: #334155; color: #64748b; cursor: not-allowed; }
+    button.secondary {
+      background: #1e3a5f;
+      border: 1px solid #0369a1;
+      color: #7dd3fc;
+    }
+    button.secondary:hover:not(:disabled) { background: #1d4ed8; }
+    /* --- Status pill --- */
+    .status { font-size: 0.78rem; color: #64748b; }
+    .status.ok  { color: #4ade80; }
+    .status.err { color: #f87171; }
+    /* --- Result box --- */
+    .result {
+      margin-top: 0.85rem;
+      font-family: ui-monospace, monospace;
+      font-size: 0.78rem;
+      white-space: pre-wrap;
+      word-break: break-all;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 0.375rem;
+      padding: 0.75rem;
+      max-height: 320px;
+      overflow-y: auto;
+      color: #a5f3fc;
+    }
+    .hidden { display: none !important; }
+    /* --- Table --- */
+    table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    th {
+      text-align: left;
+      padding: 0.45rem 0.6rem;
+      color: #64748b;
+      font-weight: 500;
+      border-bottom: 1px solid #334155;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    td { padding: 0.45rem 0.6rem; border-bottom: 1px solid #1e293b; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+    /* --- Severity badges --- */
+    .badge {
+      display: inline-block;
+      padding: 0.1rem 0.55rem;
+      border-radius: 9999px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .badge.critical { background: #450a0a; color: #fca5a5; }
+    .badge.high     { background: #431407; color: #fdba74; }
+    .badge.medium   { background: #422006; color: #fde68a; }
+    .badge.low      { background: #052e16; color: #86efac; }
+    /* --- Empty state --- */
+    .empty { text-align: center; color: #475569; padding: 2.5rem; font-size: 0.85rem; }
+    /* --- RAG answer box --- */
+    .answer-box {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 0.375rem;
+      padding: 1rem 1.25rem;
+      margin-top: 1rem;
+    }
+    .answer-box h3 { font-size: 0.8rem; color: #38bdf8; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.07em; }
+    #rag-answer-text { font-size: 0.88rem; color: #e2e8f0; line-height: 1.65; }
+    .source-item { border-top: 1px solid #1e293b; padding: 0.55rem 0; }
+    .source-item:first-child { border-top: none; }
+    .source-meta { display: flex; justify-content: space-between; margin-bottom: 0.25rem; }
+    .source-id    { font-size: 0.75rem; color: #38bdf8; font-family: ui-monospace, monospace; }
+    .source-score { font-size: 0.7rem; color: #475569; }
+    .source-snippet { font-size: 0.8rem; color: #94a3b8; line-height: 1.5; }
+    /* --- Quick help --- */
+    .quick-help { font-size: 0.78rem; color: #475569; margin-top: 0.5rem; }
+    .quick-help a { color: #38bdf8; text-decoration: none; cursor: pointer; }
+    .quick-help a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Predictive Log Anomaly Engine</h1>
+  <span>Stage 7.1 — Demo UI</span>
+</header>
+
+<nav class="tabs">
+  <div class="tab active" onclick="showTab('ingest')">1 — Ingest</div>
+  <div class="tab" onclick="showTab('alerts')">2 — Alerts</div>
+  <div class="tab" onclick="showTab('rag')">3 — RAG Ask</div>
+</nav>
+
+<!-- ================================================================
+     Panel 1: Ingest
+     ================================================================ -->
+<div id="panel-ingest" class="panel active">
+
+  <div class="card">
+    <div class="card-title">Send Log Event</div>
+    <p style="font-size:0.83rem;color:#64748b;margin-bottom:0.75rem;">
+      Post a tokenised log event to the anomaly detection pipeline.
+      In demo mode every scoring window fires an alert.
+    </p>
+
+    <label>Event payload (JSON)</label>
+    <textarea id="ingest-payload">{"service":"hdfs","token_id":42,"session_id":"blk_demo","timestamp":0,"label":1}</textarea>
+    <div class="hint">Required: service, token_id &nbsp;|&nbsp; Optional: session_id, timestamp, label</div>
+
+    <div class="btn-row">
+      <button onclick="runIngest(this)">Run Demo Ingest</button>
+      <button class="secondary" onclick="runBatch(this)">Ingest 10 Events</button>
+      <span id="ingest-status" class="status"></span>
+    </div>
+
+    <pre id="ingest-result" class="result hidden"></pre>
+  </div>
+
+</div>
+
+<!-- ================================================================
+     Panel 2: Alerts
+     ================================================================ -->
+<div id="panel-alerts" class="panel">
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+      <div class="card-title" style="margin-bottom:0;">Recent Alerts</div>
+      <button onclick="refreshAlerts(this)">Refresh</button>
+    </div>
+    <p style="font-size:0.83rem;color:#64748b;margin-bottom:1rem;">
+      Alerts are kept in an in-memory ring buffer (default 200 slots, newest first).
+    </p>
+    <div id="alerts-wrap">
+      <div class="empty">Click <strong>Refresh</strong> to load alerts.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ================================================================
+     Panel 3: RAG Ask
+     ================================================================ -->
+<div id="panel-rag" class="panel">
+
+  <div class="card">
+    <div class="card-title">Ask About the System</div>
+    <p style="font-size:0.83rem;color:#64748b;margin-bottom:0.75rem;">
+      Keyword search over the built-in knowledge base. Returns an answer + top-3 source documents.
+    </p>
+
+    <label>Question</label>
+    <input type="text" id="rag-question"
+           placeholder="e.g. How does the alert threshold work?"
+           onkeydown="if(event.key==='Enter') askQuestion(this)">
+
+    <div class="quick-help">
+      Try:
+      <a onclick="setQ('How do alerts work?')">alerts</a> &middot;
+      <a onclick="setQ('What model is used?')">model</a> &middot;
+      <a onclick="setQ('How does ingest work?')">ingest</a> &middot;
+      <a onclick="setQ('Tell me about the dataset')">dataset</a> &middot;
+      <a onclick="setQ('What is the anomaly score threshold?')">threshold</a> &middot;
+      <a onclick="setQ('How do I run with Docker?')">docker</a>
+    </div>
+
+    <div class="btn-row">
+      <button onclick="askQuestion(this)">Ask</button>
+      <span id="rag-status" class="status"></span>
+    </div>
+
+    <div id="rag-result" class="hidden">
+      <div class="answer-box">
+        <h3>Answer</h3>
+        <p id="rag-answer-text"></p>
+        <div style="margin-top:1rem;">
+          <h3>Sources</h3>
+          <div id="rag-sources"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ------------------------------------------------------------------ */
+/* Tab navigation                                                        */
+/* ------------------------------------------------------------------ */
+function showTab(name) {
+  const names = ['ingest', 'alerts', 'rag'];
+  document.querySelectorAll('.tab').forEach((t, i) => {
+    t.classList.toggle('active', names[i] === name);
+  });
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+}
+
+/* ------------------------------------------------------------------ */
+/* Helpers                                                               */
+/* ------------------------------------------------------------------ */
+function setStatus(id, msg, state) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.className = 'status' + (state === 'ok' ? ' ok' : state === 'err' ? ' err' : '');
+}
+
+function setQ(q) {
+  document.getElementById('rag-question').value = q;
+}
+
+function fmtTime(ts) {
+  if (!ts) return '-';
+  try {
+    return new Date(ts * 1000).toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+  } catch (_) { return String(ts); }
+}
+
+function fmtScore(s) {
+  return (typeof s === 'number') ? s.toFixed(3) : '-';
+}
+
+function truncate(str, n) {
+  if (!str) return '-';
+  return str.length > n ? str.slice(0, n) + '…' : str;
+}
+
+/* ------------------------------------------------------------------ */
+/* Panel 1 — Ingest                                                      */
+/* ------------------------------------------------------------------ */
+async function runIngest(btn) {
+  const raw = document.getElementById('ingest-payload').value.trim();
+  let body;
+  try { body = JSON.parse(raw); }
+  catch (_) { setStatus('ingest-status', 'Invalid JSON', 'err'); return; }
+
+  btn.disabled = true;
+  setStatus('ingest-status', 'Sending…', null);
+  try {
+    const resp = await fetch('/ingest', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const data = await resp.json();
+    const el = document.getElementById('ingest-result');
+    el.textContent = JSON.stringify(data, null, 2);
+    el.classList.remove('hidden');
+    const fired = data.alert != null;
+    setStatus('ingest-status',
+      resp.ok ? (fired ? 'Alert fired!' : (data.window_emitted ? 'Window scored — no alert' : 'Buffering…')) : ('HTTP ' + resp.status),
+      resp.ok ? 'ok' : 'err');
+  } catch (e) {
+    setStatus('ingest-status', 'Network error: ' + e.message, 'err');
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function runBatch(btn) {
+  btn.disabled = true;
+  setStatus('ingest-status', 'Sending 10 events…', null);
+  const services   = ['hdfs','bgl','hdfs','hdfs','bgl','hdfs','bgl','hdfs','bgl','hdfs'];
+  const tokenIds   = [42, 17, 8, 99, 31, 55, 12, 73, 28, 66];
+  const sessionIds = services.map((_, i) => 'demo-session-' + i);
+  let fired = 0, errors = 0;
+  try {
+    for (let i = 0; i < 10; i++) {
+      try {
+        const resp = await fetch('/ingest', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ service: services[i], token_id: tokenIds[i], session_id: sessionIds[i] }),
+        });
+        const d = await resp.json();
+        if (d.alert) fired++;
+      } catch (_) { errors++; }
+    }
+    const el = document.getElementById('ingest-result');
+    el.textContent = [
+      '10 events ingested.',
+      'Alerts fired : ' + fired,
+      'Errors       : ' + errors,
+      '',
+      'Switch to the Alerts tab to view them.',
+    ].join('\n');
+    el.classList.remove('hidden');
+    setStatus('ingest-status', '10 events sent — ' + fired + ' alert(s) fired', fired > 0 ? 'ok' : null);
+  } catch (e) {
+    setStatus('ingest-status', 'Error: ' + e.message, 'err');
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Panel 2 — Alerts                                                      */
+/* ------------------------------------------------------------------ */
+async function refreshAlerts(btn) {
+  btn.disabled = true;
+  try {
+    const resp = await fetch('/alerts');
+    const data = await resp.json();
+    renderAlerts(data.alerts || []);
+  } catch (e) {
+    document.getElementById('alerts-wrap').innerHTML =
+      '<div class="empty" style="color:#f87171">Error: ' + e.message + '</div>';
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function renderAlerts(alerts) {
+  const wrap = document.getElementById('alerts-wrap');
+  if (!alerts.length) {
+    wrap.innerHTML = '<div class="empty">No alerts yet. Use the Ingest tab to send events first.</div>';
+    return;
+  }
+  const rows = alerts.slice().reverse().map(a => {
+    const ev  = JSON.stringify(a.evidence_window || {});
+    const sev = (a.severity || 'low').toLowerCase();
+    return '<tr>' +
+      '<td style="white-space:nowrap;">' + fmtTime(a.timestamp) + '</td>' +
+      '<td><span class="badge ' + sev + '">' + sev + '</span></td>' +
+      '<td>' + (a.service || '-') + '</td>' +
+      '<td style="font-family:ui-monospace,monospace;">' + fmtScore(a.score) + '</td>' +
+      '<td style="color:#64748b;font-size:0.75rem;" title="' + ev.replace(/"/g, '&quot;') + '">' +
+        truncate(ev, 70) +
+      '</td>' +
+      '</tr>';
+  }).join('');
+  wrap.innerHTML =
+    '<table><thead><tr>' +
+      '<th>Timestamp (UTC)</th><th>Severity</th><th>Service</th><th>Score</th><th>Evidence</th>' +
+    '</tr></thead><tbody>' + rows + '</tbody></table>' +
+    '<p class="hint" style="margin-top:0.6rem;">' + alerts.length + ' alert(s) in ring buffer</p>';
+}
+
+/* ------------------------------------------------------------------ */
+/* Panel 3 — RAG Ask                                                     */
+/* ------------------------------------------------------------------ */
+async function askQuestion(btn) {
+  const q = document.getElementById('rag-question').value.trim();
+  if (!q) { setStatus('rag-status', 'Enter a question', 'err'); return; }
+
+  // btn might be the input element (from onkeydown) — find the button
+  const realBtn = document.querySelector('#panel-rag button');
+  realBtn.disabled = true;
+  setStatus('rag-status', 'Searching…', null);
+
+  try {
+    const resp = await fetch('/query', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question: q }),
+    });
+    const data = await resp.json();
+
+    document.getElementById('rag-answer-text').textContent = data.answer || '-';
+
+    const sourcesEl = document.getElementById('rag-sources');
+    sourcesEl.innerHTML = (data.sources || []).map(s =>
+      '<div class="source-item">' +
+        '<div class="source-meta">' +
+          '<span class="source-id">' + s.id + '</span>' +
+          '<span class="source-score">relevance: ' + fmtScore(s.score) + '</span>' +
+        '</div>' +
+        '<div class="source-snippet">' + s.snippet + '</div>' +
+      '</div>'
+    ).join('');
+
+    document.getElementById('rag-result').classList.remove('hidden');
+    setStatus('rag-status', 'Done', 'ok');
+  } catch (e) {
+    setStatus('rag-status', 'Error: ' + e.message, 'err');
+  } finally {
+    realBtn.disabled = false;
+  }
+}
+</script>
+
+</body>
+</html>

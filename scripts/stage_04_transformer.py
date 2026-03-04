@@ -1,3 +1,21 @@
+# scripts/stage_04_transformer.py
+
+# Purpose: Train a next-token GPT-style transformer model on the sequence data 
+# and evaluate its performance for anomaly detection.
+
+# Input: Reads data/processed/sequences_train.parquet, sequences_val.parquet, 
+# and sequences_test.parquet, which contain sequence_id, 
+# tokens (JSON string), and label columns.
+
+# Output: Writes models/transformer.pt (the trained transformer model), 
+# artifacts/threshold_transformer.json (the calibrated threshold and related info), 
+# reports/stage_04_transformer.md (a markdown report summarizing the results), 
+# and reports/metrics_transformer.json (a JSON file with detailed metrics).
+
+# Used by: This script is used by the main pipeline to train and evaluate a transformer-based anomaly detection model. 
+# The generated model and threshold are used for inference in later stages, 
+# and the report provides a summary of the transformer's performance.
+
 """
 Stage 04B — Transformer: train next-token GPT-style model and score sequences.
 

@@ -1,0 +1,28 @@
+{
+  "alert_id": "d8899d82-810e-42c0-9641-6f9e7d2a0347",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=6678: <NUM> <NUM> <NUM> INFO dfs.DataNode$DataXceiver: writeBlock <BLK> received exception java.io.IOExcep...",
+      "tid=6489: - <HEX> <DATE> UNKNOWN_LOCATION <TS> UNKNOWN_LOCATION NULL DISCOVERY INFO Node card VPD check: U01 n...",
+      "tid=1438: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL disable flagging of DDR UE's as major internal er...",
+      "tid=4252: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO Kernel detected <NUM> integer alignment exceptions...",
+      "tid=2425: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x0659e2e0, mask 0x08"
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 20
+  }
+}

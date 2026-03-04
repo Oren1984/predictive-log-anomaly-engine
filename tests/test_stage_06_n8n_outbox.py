@@ -1,3 +1,15 @@
+# test/test_stage_06_n8n_outbox.py
+
+# Purpose: Tests for N8nWebhookClient: DRY_RUN writes files, payload integrity.
+
+# Input: None (test code only)
+
+# Output: Test results (pass/fail) when run with pytest.
+
+# Used by: N/A (these are tests for N8nWebhookClient,
+# indirectly used by the alerting pipeline and any downstream components that consume alerts)
+
+
 """Tests for N8nWebhookClient: DRY_RUN writes files, payload integrity."""
 from __future__ import annotations
 

@@ -1,3 +1,13 @@
+# test/unit/test_explain_decode.py
+
+# Purpose: Unit tests for the token_id -> template string decoding logic used in InferenceEngine.explain().
+
+# Input: None (test code only)
+
+# Output: Test results (pass/fail) when run with pytest.
+
+# Used by: N/A (these are unit tests for the decoding logic, indirectly used by InferenceEngine.explain()).
+
 """Tests for token_id -> template string decoding via artifacts/vocab.json."""
 from __future__ import annotations
 

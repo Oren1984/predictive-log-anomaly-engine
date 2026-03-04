@@ -1,3 +1,16 @@
+# scripts/stage_03_sequences.py
+
+# Purpose: Build train/val/test sequence splits and write parquet files for model training and evaluation.
+
+# Input: Reads session sequences from data/intermediate/session_sequences_v2.csv, which contains session_id, tokens, and label columns.
+
+# Output: Writes data/processed/sequences_train.parquet, data/processed/sequences_val.parquet, 
+# and data/processed/sequences_test.parquet with columns: sequence_id, tokens (JSON string), label.
+
+# Used by: This script is used by the main pipeline to prepare sequence splits for model training and evaluation. 
+# The generated files are consumed in later stages for model input preparation and anomaly detection. 
+# It can be run independently to regenerate sequence splits if the session sequences are updated or if you want to switch between demo and full modes.
+
 """
 Stage 03 — Sequences: build train/val/test sequence splits and write parquet.
 

@@ -1,3 +1,18 @@
+# scripts/stage_02_templates.py
+
+# Purpose: Load existing mining artifacts and write artifacts/templates.json, artifacts/vocab.json, and data/processed/events_tokenized.parquet.
+
+# Input: Existing mining artifacts in data/intermediate/templates.csv and data/intermediate/events_with_templates.csv
+
+# Output: artifacts/templates.json, artifacts/vocab.json, and data/processed/events_tokenized.parquet with columns: 
+# timestamp, service, session_id, template_id, token_id, label
+
+# Used by: This script is used by the main pipeline to prepare template and tokenization artifacts for model training and inference. 
+# The generated files are consumed in later stages for sequence building, 
+# model input preparation, and ultimately anomaly detection. 
+# It can be run independently to regenerate templates and tokenized data 
+# if the mining step is updated or if you want to switch between demo and full modes.
+
 """
 Stage 02 — Templates: load existing mining artifacts and write
 artifacts/templates.json, artifacts/vocab.json, and

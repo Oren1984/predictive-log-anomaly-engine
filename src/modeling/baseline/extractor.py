@@ -1,3 +1,23 @@
+# src/modeling/baseline/extractor.py
+
+# Purpose:
+
+# Input: - A list of `Sequence` objects, where each `Sequence` contains 
+# a list of token IDs (integers) representing a sequence of events or actions.
+
+# Output: - A 2-D numpy array of shape (n_sequences, n_features) containing 
+# the extracted features for each sequence. The features include:
+#   1. `sequence_length`: The total number of tokens in the sequence.
+#   2. `unique_count`: The number of distinct token IDs in the sequence.
+#   3. `unique_ratio`: The ratio of unique_count to sequence_length (0 if sequence_length is 0).
+#   4. `template_entropy`: The Shannon entropy over the token distribution in the sequence.
+#   5. `tid_raw_{tid}`: The raw count of each token in the top-K vocabulary.
+#   6. `tid_norm_{tid}`: The normalized count of each token in the top-K vocabulary (count / sequence_length).
+
+# Used by: Other modules in the project that require feature extraction from Sequence objects, 
+# such as training scripts that need to convert raw sequences 
+# into feature matrices for model training, or evaluation scripts
+
 """Stage 4A — Baseline: feature extractor from Sequence objects."""
 from __future__ import annotations
 

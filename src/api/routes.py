@@ -1,3 +1,26 @@
+# src/api/routes.py
+
+# Purpose: Define the API routes for the FastAPI application, 
+# including endpoints for ingesting events, listing recent alerts, 
+# checking health status, and exposing metrics.
+
+# Input: The routes are defined using FastAPI's APIRouter, 
+# and they interact with the shared Pipeline instance to process events 
+# and retrieve alerts. The /ingest endpoint accepts a tokenised log event, 
+# processes it through the pipeline, and returns the results. The /alerts 
+# endpoint returns the most recent alerts from the pipeline's buffer. 
+# The /health endpoint checks the health status of the application, 
+# and the /metrics endpoint exposes Prometheus metrics.
+
+# Output: Each endpoint returns a response model defined in the .schemas module, 
+# which includes structured data for the results of processing events, listing alerts, 
+# and health status. 
+# The /metrics endpoint returns a plain text response in Prometheus format.
+
+# Used by: The routes defined in this file are included in the main FastAPI application instance created in src.api.app.py, 
+# and they are used to handle incoming HTTP requests to the API. 
+# They are also tested in the test file test_stage_07_api.py.
+
 """Stage 7 — API: route definitions."""
 from __future__ import annotations
 

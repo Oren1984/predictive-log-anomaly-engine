@@ -1,3 +1,13 @@
+# test/unit/test_inference_engine_smoke.py
+
+# Purpose: Smoke tests for the InferenceEngine end-to-end flow.
+
+# Input: None (test code only)
+
+# Output: Test results (pass/fail) when run with pytest.
+
+# Used by: N/A (these are unit tests for the InferenceEngine class)
+
 """Smoke tests for InferenceEngine end-to-end flow."""
 from __future__ import annotations
 
@@ -5,6 +15,8 @@ import sys
 from pathlib import Path
 
 import pytest
+
+_slow = pytest.mark.slow
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
@@ -79,6 +91,7 @@ class TestEngineConstruction:
 # Returns None until window full
 # ---------------------------------------------------------------------------
 
+@_slow
 class TestNoResultBeforeWindowFull:
     @needs_artifacts
     def test_none_until_window_full(self):
@@ -116,6 +129,7 @@ class TestNoResultBeforeWindowFull:
 # RiskResult field validation
 # ---------------------------------------------------------------------------
 
+@_slow
 class TestRiskResultFields:
     @needs_artifacts
     def test_all_required_fields_present(self):
@@ -188,6 +202,7 @@ class TestRiskResultFields:
 # Stride behaviour in engine
 # ---------------------------------------------------------------------------
 
+@_slow
 class TestEngineStride:
     @needs_artifacts
     def test_multiple_emissions_with_stride(self):
@@ -221,6 +236,7 @@ class TestEngineStride:
 # Baseline scoring helper
 # ---------------------------------------------------------------------------
 
+@_slow
 class TestScoreBaseline:
     @needs_artifacts
     def test_score_baseline_returns_float(self):
@@ -249,6 +265,7 @@ class TestScoreBaseline:
 # Transformer mode (smoke)
 # ---------------------------------------------------------------------------
 
+@_slow
 class TestTransformerSmoke:
     @needs_transformer
     def test_transformer_mode_returns_result(self):
@@ -279,6 +296,7 @@ class TestTransformerSmoke:
 # Serialisation
 # ---------------------------------------------------------------------------
 
+@_slow
 class TestRiskResultSerialisation:
     @needs_artifacts
     def test_to_dict_is_serialisable(self):

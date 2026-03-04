@@ -1,3 +1,22 @@
+# src/api/pipeline.py
+
+# Purpose: Implement the Pipeline class, which serves as a container for 
+# all live runtime components shared across API requests.
+# This includes the inference engine, alert manager, n8n client, and metrics registry.
+
+# Input: The Pipeline class is initialized with optional settings and metrics registry. 
+# It provides methods to load ML models and process 
+# incoming events through the pipeline, which includes scoring and alerting.
+
+# Output: The process_event method returns a dictionary containing the results of processing an event, 
+# including whether a window was emitted, the risk result, 
+# and any alert that was fired. 
+# The recent_alerts method returns a list of the most recent alerts from the buffer.
+
+# Used by: The Pipeline class is used in the main API implementation (src.api.app.py) 
+# to process incoming events and manage the inference engine, alert manager, and n8n client. 
+# It is also tested in the test file test_stage_07_pipeline.py.
+
 """Stage 7 — API: Pipeline container (engine + alerts + metrics + buffer)."""
 from __future__ import annotations
 

@@ -1,3 +1,28 @@
+#src/alerts/models.py
+
+# Purpose: Define the Alert and AlertPolicy data models used in the alerting system.
+
+# Input: The Alert class represents a fired alert with all relevant information, 
+# while the AlertPolicy class defines the rules for when a RiskResult should 
+# be converted into an Alert and how to classify its severity. 
+# These models are used by the AlertManager to manage the lifecycle of 
+# alerts based on the results from the inference engine.
+
+# Output: The Alert and AlertPolicy classes defined in this module are used by the AlertManager class 
+# (src/alerts/manager.py) to manage the lifecycle of alerts based on the results from the inference engine.
+# They are also used in various test files (e.g., test_stage_06_alert_policy.py, test_stage_06_dedup_cooldown.py) 
+# to create mock RiskResult objects and verify that the alerting logic works as expected under different conditions. 
+# Additionally, these classes are used in the main API implementation (src.api.app.py) 
+# to create and classify alerts when processing events.
+
+# Used by: The Alert and AlertPolicy classes defined in this module are used by the AlertManager class (src/alerts/manager.py) 
+# to manage the lifecycle of alerts based on the results from the inference engine. 
+# They are also used in various test files (e.g., test_stage_06_alert_policy.py, 
+# test_stage_06_dedup_cooldown.py) to create mock RiskResult objects and 
+# verify that the alerting logic works as expected under different conditions. 
+# Additionally, these classes are used in the main API implementation (src.api.app.py) 
+# to create and classify alerts when processing events.
+
 """Stage 6 — Alerts: domain models (Alert, AlertPolicy)."""
 from __future__ import annotations
 

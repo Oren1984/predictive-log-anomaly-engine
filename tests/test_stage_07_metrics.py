@@ -1,3 +1,15 @@
+# test/test_stage_07_metrics.py
+
+# Purpose: Tests for Stage 7 MetricsRegistry and /metrics endpoint.
+
+# Input: None (test code only)
+
+# Output: Test results (pass/fail) when run with pytest.
+
+# Used by: N/A (these are tests for MetricsRegistry and the /metrics endpoint,
+# indirectly used by the API and any downstream components that rely on metrics)
+
+
 """Tests for Stage 7 MetricsRegistry and /metrics endpoint."""
 from __future__ import annotations
 
@@ -7,6 +19,8 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 from prometheus_client import CollectorRegistry
+
+pytestmark = pytest.mark.integration
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))

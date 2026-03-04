@@ -1,3 +1,18 @@
+# scripts/stage_01_synth_generate.py
+
+# Purpose: This script generates synthetic log events for testing and demonstration purposes.
+# It creates multiple scenarios with different patterns of normal and anomalous behavior,
+# and outputs the generated events in both CSV and Parquet formats,
+# along with a schema description and a summary report.
+
+# Input: Command-line arguments specifying the mode, number of events, services, output paths, and random seed.
+
+# Output: Generated synthetic log events in CSV and Parquet formats, schema description, scenario definitions, and a summary report.
+
+# Used by: This script can be run independently to generate synthetic data for testing the anomaly detection pipeline.
+# It is not directly used by other scripts but provides a synthetic dataset
+# that can be used in place of real data for stages 02 and beyond.
+
 """
 Stage 01 — Synthetic: generate synthetic log events.
 

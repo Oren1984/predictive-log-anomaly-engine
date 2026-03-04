@@ -1,3 +1,21 @@
+# scripts/stage_04_baseline.py
+
+# Purpose: Train a baseline IsolationForest anomaly detection model on the sequence data, 
+# calibrate a threshold, and evaluate performance.
+
+# Input: Reads data/processed/sequences_train.parquet, sequences_val.parquet, 
+# and sequences_test.parquet, which contain sequence_id, tokens (JSON string), and label columns.
+
+# Output: Writes models/baseline.pkl (the trained IsolationForest model), 
+# artifacts/threshold.json (the calibrated threshold and related info), 
+# and reports/stage_04_baseline.md (a markdown report summarizing the results).
+
+# Used by: This script is used by the main pipeline to train and evaluate a baseline anomaly detection model. 
+# The generated model and threshold are used for inference in later stages, 
+# and the report provides a summary of the baseline performance. 
+# It can be run independently to retrain the baseline model if the sequence data is updated 
+# or if you want to switch between demo and full modes.
+
 """
 Stage 04A — Baseline: train IsolationForest anomaly detector.
 

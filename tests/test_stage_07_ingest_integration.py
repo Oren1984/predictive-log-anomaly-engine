@@ -1,3 +1,14 @@
+# test/test_stage_07_ingest_integration.py
+
+# Purpose: Tests for Stage 7 POST /ingest and GET /alerts integration.
+
+# Input: None (test code only)
+
+# Output: Test results (pass/fail) when run with pytest.
+
+# Used by: N/A (these are tests for the ingest and alerts endpoints,
+# indirectly used by the API and any downstream components that rely on these endpoints)
+
 """Tests for Stage 7 POST /ingest and GET /alerts integration."""
 from __future__ import annotations
 
@@ -6,6 +17,8 @@ from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
+
+pytestmark = pytest.mark.integration
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))

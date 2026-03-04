@@ -1,3 +1,29 @@
+# src/data/log_event.py
+
+# Purpose: Define the LogEvent dataclass, 
+# which represents a single log entry in the synthetic log generation pipeline.
+# This class includes fields for the timestamp, service name, log level, 
+# message, metadata, and anomaly label. It also provides helper methods 
+# for serializing to and from dictionaries, which is useful
+
+# Input: The LogEvent class takes the following fields as input:
+# - timestamp: A Unix timestamp (float) or a datetime object representing when the log event occurred.
+# - service: A string representing the service or dataset name (e.g., "auth", "api", "billing", "db").
+# - level: A string representing the log level (e.g., "INFO", "WARNING", "ERROR").
+# - message: A string containing the raw log message text.
+# - meta: An optional dictionary containing arbitrary key/value metadata (e.g., host, component, phase).
+# - label: An optional integer representing the anomaly label (
+
+# Output: The LogEvent class provides a structured representation of a log entry,
+# along with methods to convert to and from a dictionary format that is suitable for JSON serialization.
+# The to_dict() method converts a LogEvent instance into a dictionary, 
+# while the from_dict() class method reconstructs a LogEvent instance from a dictionary.
+# This allows for easy storage and retrieval of log events in formats like parquet, 
+# which may not support complex nested types directly.
+
+# Used by: The LogEvent class is used by various components of the synthetic log generation pipeline,
+# including the synthetic log generator and scenario builder, to create and manipulate log events.
+
 """
 src.data.log_event — Core LogEvent dataclass with IO helpers.
 

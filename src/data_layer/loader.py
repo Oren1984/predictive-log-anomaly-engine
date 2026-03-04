@@ -1,3 +1,14 @@
+# src/data_layer/loader.py
+
+# Purpose: Define the KaggleDatasetLoader class for loading and normalizing the unified event dataset.
+
+# Input: - Optional root path to the dataset (defaults to project root).
+#        - Optional nrows to limit the number of rows loaded for testing.
+
+# Output: - Methods to download (no-op), load raw DataFrame, normalize schema, and iterate over LogEvent objects.
+
+# Used by: - Other modules in the project that need to load and work with the unified event dataset.
+
 """Stage 1 — Data Layer: dataset loader for existing artifacts."""
 from pathlib import Path
 from typing import Iterator, Optional

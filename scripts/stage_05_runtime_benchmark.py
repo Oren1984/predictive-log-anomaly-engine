@@ -1,3 +1,20 @@
+# scripts/stage_05_runtime_benchmark.py
+
+# Purpose: Measure the runtime performance (throughput, latency, and memory) 
+# of the anomaly detection models in a streaming inference scenario.
+
+# Input: Reads data/processed/events_tokenized.parquet, which contains tokenized events with timestamps, 
+# service names, session IDs, token IDs, template IDs, and labels.
+
+# Output: Writes reports/stage_05_runtime_benchmark.md, a markdown report summarizing the benchmark results, 
+# and logs detailed information to ai_workspace/logs/stage_05_runtime_benchmark.log.
+
+# Used by: This script is used by the main pipeline to evaluate the runtime performance 
+# of the anomaly detection models under realistic streaming conditions. 
+# It can be run independently to benchmark different models (baseline, transformer, ensemble) 
+# and configurations (demo vs full mode, keying by service vs session). 
+# The results help inform trade-offs between model complexity and operational efficiency.
+
 """
 Stage 05 — Runtime Benchmark: measure throughput, latency, and memory.
 

@@ -1,3 +1,19 @@
+# scripts/stage_06_demo_alerts.py
+
+# Purpose: Simulate live stream ingestion and fire alerts using the InferenceEngine and AlertManager.
+
+# Input: Reads data/processed/events_tokenized.parquet (n_events rows) produced by stage_02_templates.py. 
+# Each row is converted to an event dict and fed to the InferenceEngine. 
+# RiskResults are processed by AlertManager and dispatched via N8nWebhookClient 
+# in DRY_RUN mode (writes to outbox instead of making network calls).
+
+# Output: Writes artifacts/n8n_outbox/<alert_id>.json (one file per fired alert) 
+# and logs to ai_workspace/logs/stage_06_demo_alerts.log
+
+# Used by: This is a standalone demo script that can be run directly to simulate the alerting pipeline. 
+# It does not have downstream dependencies but relies on the output of 
+# stage_02_templates.py to provide the input parquet file.
+
 """
 Stage 06 -- Alerts Demo: simulate live stream ingestion and fire alerts.
 

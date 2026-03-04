@@ -1,3 +1,17 @@
+# scripts/stage_07_run_api.py
+
+# Stage 7.1 — Demo UI (FastAPI) — Practical, Minimal, For Presentation Only
+
+# Purpose: This script starts the FastAPI server that serves the anomaly detection model. 
+# It reads configuration from environment variables or command-line arguments and runs the API server using uvicorn.
+
+# Input: None (the server will read configuration from environment variables or CLI args) 
+
+# Output: The API server will be running and ready to accept requests on the specified host and port. 
+
+# Used by: This is the final stage of the demo pipeline. It can be run after all previous stages 
+# have been completed to start the API server that serves the anomaly detection model.
+
 """
 Stage 07 -- Run API: start the FastAPI service with uvicorn.
 

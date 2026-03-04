@@ -1,3 +1,15 @@
+# test/test_stage_07_auth.py
+
+# Purpose: Tests for Stage 7 AuthMiddleware (X-API-Key).
+
+# Input: None (test code only)
+
+# Output: Test results (pass/fail) when run with pytest.
+
+# Used by: N/A (these are tests for AuthMiddleware, indirectly used by the API endpoints 
+# and any downstream components that rely on the API)
+
+
 """Tests for Stage 7 AuthMiddleware (X-API-Key)."""
 from __future__ import annotations
 
@@ -6,6 +18,8 @@ from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
+
+pytestmark = pytest.mark.integration
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))

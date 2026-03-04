@@ -1,3 +1,22 @@
+# scripts/stage_05_runtime_calibrate.py
+
+# Purpose: Perform stream-based threshold calibration for the runtime demo by streaming events through the InferenceEngine,
+# collecting risk scores, and choosing thresholds based on either F1 maximisation (if valid labels are present) 
+# or a percentile method targeting a specified alert rate.
+
+# Input: Reads data/processed/events_tokenized.parquet, which contains tokenized events with timestamps, 
+# service/session IDs, token/template IDs, and labels.
+
+# Output: Writes artifacts/threshold_runtime.json (calibrated thresholds and metadata), 
+# reports/runtime_calibration_scores.csv (per-window scores and labels), 
+# reports/stage_31_runtime_calibration_report.md (a markdown report summarizing the calibration process and results), 
+# and logs to ai_workspace/logs/stage_05_runtime_calibrate.log.
+
+# Used by: This script is used by the main pipeline to perform runtime threshold calibration for the anomaly detection models. 
+# The generated thresholds are used in the runtime demo (stage_05_runtime_demo.py) 
+# to flag anomalies based on the collected risk scores. 
+# The report provides insights into the calibration process, chosen thresholds, and achieved alert rates.
+
 """
 Stage 31 — Runtime Calibration: stream-based threshold calibration (NO retraining).
 

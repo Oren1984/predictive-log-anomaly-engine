@@ -1,3 +1,18 @@
+# src/health/checks.py
+
+# Purpose: Defines the HealthChecker class that performs critical 
+# and optional health checks against the live Pipeline object 
+# to determine the overall health status of the system.
+
+# Input: - A Pipeline object (optional) that the HealthChecker will 
+# use to perform checks against its components.
+
+# Output: - A dictionary containing the overall health status, uptime, 
+# and the status of individual components (inference engine, alert manager, alert buffer).
+
+# Used by: - API endpoints that need to report the health status of the system, 
+# such as readiness and liveness probes for container orchestration platforms like Kubernetes.
+
 """Stage 7 — Health: readiness and liveness checks."""
 from __future__ import annotations
 

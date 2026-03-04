@@ -1,3 +1,25 @@
+# src/api/schemas.py
+
+# Purpose: Define the Pydantic v2 request and response schemas for the API endpoints.
+# This includes the schema for the ingest request, 
+# as well as the response schemas for ingesting events, 
+# listing alerts, and checking health status.
+
+# Input: The schemas are defined as Pydantic models, which provide validation 
+# and serialization for the API requests and responses. 
+# The IngestRequest schema defines the expected fields for the POST /ingest endpoint, 
+# while the IngestResponse, AlertListResponse, and HealthResponse schemas define 
+# the structure of the responses for their respective endpoints.
+
+# Output: The defined schemas are used in the API route definitions (src.api.routes.py) 
+# to specify the expected request body and response models for each endpoint. 
+# They ensure that the API receives and returns data in a consistent and validated format.
+
+# Used by: The schemas defined in this file are used in the route definitions in src.api.routes.py 
+# to validate incoming requests and structure outgoing responses. 
+# They are also used in the test file test_stage_07_api.py 
+# to create test cases for the API endpoints.
+
 """Stage 7 — API: Pydantic v2 request/response schemas."""
 from __future__ import annotations
 

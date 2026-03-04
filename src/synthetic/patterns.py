@@ -1,3 +1,23 @@
+# src/synthetic/patterns.py
+
+# Purpose: Defines the FailurePattern abstract base class and concrete subclasses 
+# representing specific failure scenarios (MemoryLeakPattern, 
+# DiskFullPattern, AuthBruteForcePattern, NetworkFlapPattern).
+# Each pattern simulates a specific type of failure across three phases (normal, degradation, failure) 
+# and generates LogEvent objects with appropriate messages, levels, and labels.
+
+# Input: - FailurePattern: an abstract base class that defines the interface for emitting log events based on a scenario context, 
+#          including methods for determining the current phase and labeling events.
+#        - MemoryLeakPattern: a concrete implementation of FailurePattern that simulates a memory leak scenario.
+#        - DiskFullPattern: a concrete implementation of FailurePattern that simulates a disk filling up scenario.
+#        - AuthBruteForcePattern: a concrete implementation of FailurePattern that simulates a brute-force authentication attack scenario.
+#        - NetworkFlapPattern: a concrete implementation of FailurePattern that simulates a network interface becoming unstable scenario.
+
+# Output: - Each concrete FailurePattern subclass implements the emit_event method 
+#           to generate LogEvent objects with realistic messages and metadata based on the current phase of the scenario.
+
+# Used by: - The SyntheticLogGenerator class to emit log events based on defined failure patterns and scenarios.
+
 """Stage 1 — Synthetic: failure pattern definitions."""
 from __future__ import annotations
 

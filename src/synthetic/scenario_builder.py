@@ -1,3 +1,29 @@
+# src/synthetic/scenario_builder.py
+
+# Purpose: Defines the ScenarioBuilder class, which provides methods for constructing 
+# scenario definition dictionaries that specify how to generate synthetic log events using the SyntheticLogGenerator.
+# The ScenarioBuilder allows users to define scenarios with specific services, 
+# hosts, event counts, phase proportions, and associated failure patterns. 
+# It includes validation to ensure that the defined scenarios are well-formed 
+# and can be used directly by the SyntheticLogGenerator to produce synthetic log data.
+
+# Input: - scenario_id: a unique string identifier for the scenario.
+#        - service: the name of the service affected by the scenario (e.g., "app-server").
+#        - host: the identifier for the host involved in the scenario (e.g., "host-01").
+#        - start_ts: the starting Unix timestamp for the generated events.
+
+# Output: - The build_scenario method returns a dictionary containing all the necessary 
+#           information to generate synthetic log events for the defined scenario, 
+#           including phase boundaries and anomaly rates.
+#         - The build_hybrid_scenario method provides a convenient way to create 
+#           scenarios that involve multiple failure patterns, 
+#           distributing events across the specified patterns in a round-robin fashion.
+
+# Used by: - The main application to define scenarios for synthetic log generation,
+#            which are then passed to the SyntheticLogGenerator to 
+#            produce synthetic log data for training and evaluating models, 
+#            as well as for testing and demonstration purposes.
+
 """Stage 1 — Synthetic: scenario definition builder."""
 from __future__ import annotations
 

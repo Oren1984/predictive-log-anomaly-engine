@@ -1,3 +1,18 @@
+# scripts/20_prepare_events.py
+
+# Purpose: This script processes the raw log files from the HDFS and BGL datasets, extracts relevant information,
+# and combines them into a unified CSV file.
+# The resulting dataset will be used for building sequences in the next step of the predictive log anomaly engine pipeline.
+
+# Input: The script reads raw log files (HDFS.log and BGL.log) and their corresponding label files (anomaly_label.csv for HDFS) from the data/raw directory.
+# It processes the logs to extract session IDs, messages, and labels, and then combines them into a unified dataset.
+
+# Output: The processed data is saved as a unified CSV file (events_unified.csv) in the data/processed directory,
+# containing columns for timestamp, dataset, session_id, message, and label.
+
+# Used by: This script is typically run after downloading the raw datasets (using scripts/10_download_data.py)
+# and before building sequences (using scripts/30_build_sequences.py).
+
 import re
 import pandas as pd
 from pathlib import Path
@@ -13,7 +28,7 @@ PROCESSED_PATH.mkdir(parents=True, exist_ok=True)
 def process_hdfs():
     print("Processing HDFS...")
 
-    # חיפוש מדויק של HDFS.log (ולא HDFS_2)
+    # Search for log and label files in the raw data directory)
     log_candidates = list(RAW_PATH.rglob("HDFS.log"))
     if not log_candidates:
         raise FileNotFoundError("HDFS.log not found under data/raw")

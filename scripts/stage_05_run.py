@@ -1,3 +1,8 @@
+# scripts/stage_05_run.py
+# This script is a one-command wrapper to run the demo and benchmark for the predictive log anomaly engine. 
+# It allows you to specify the mode (demo or full) and which model to use (baseline, transformer, or ensemble). 
+# You can also choose to skip the demo or benchmark if you only want to run one of them.
+
 """
 Stage 05 — One-command wrapper: runs demo + benchmark.
 

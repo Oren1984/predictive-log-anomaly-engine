@@ -1,3 +1,21 @@
+# src/parsing/parsers.py
+
+# Purpose: Define the LogParser interface and provide minimal implementations 
+# for regex-based and JSON-based log parsing.
+
+# Input: - LogParser: An abstract base class defining the parse method.
+#        - RegexLogParser: A concrete implementation that uses regex to extract
+#          timestamp, level, and message from log lines.
+#        - JsonLogParser: A concrete implementation that parses JSON-structured log lines.
+
+# Output: - LogParser: An interface for parsing raw log lines into structured LogEvent objects.
+#         - RegexLogParser: Parses logs based on a regex pattern, extracting timestamp, level
+#         - JsonLogParser: Parses JSON-structured log lines into LogEvent objects.
+
+# Used by: Other stages of the pipeline that need to convert raw log lines 
+# into structured data for further processing, 
+# such as template mining and tokenization.
+
 """Stage 2 — Parsing: log parser interface and minimal implementations."""
 import json
 import re

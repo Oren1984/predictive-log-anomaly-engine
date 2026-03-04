@@ -1,3 +1,21 @@
+# src/alerts/manager.py
+
+# Purpose: Implement the AlertManager class, which manages the lifecycle of 
+# alerts including deduplication and cooldown logic.
+
+# Input: The AlertManager class takes an AlertPolicy and an optional clock function. 
+# It provides an emit method that evaluates a RiskResult against the policy 
+# and cooldown state to determine whether to fire an alert or suppress it.
+
+# Output: The emit method returns a list of Alert objects when an alert is fired, 
+# or an empty list when the alert is suppressed due to policy rules or cooldown. 
+# The AlertManager also tracks statistics on the number of alerts fired and suppressed.
+
+# Used by: The AlertManager is used in the main API implementation (src.api.app.py) 
+# to manage alerts based on the results from the inference engine. 
+# It is also tested in various test files (e.g., test_stage_06_alert_policy.py, test_stage_06_dedup_cooldown.py) 
+# to ensure that the alerting logic works as expected under different conditions.
+
 """Stage 6 — Alerts: AlertManager with deduplication and cooldown."""
 from __future__ import annotations
 

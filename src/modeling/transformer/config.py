@@ -1,3 +1,23 @@
+# src/modeling/transformer/config.py
+
+# Purpose: Define the TransformerConfig dataclass, which encapsulates all 
+# hyperparameters and configuration settings for the next-token transformer model.
+
+# Input: The TransformerConfig dataclass includes fields for both the architecture 
+# of the transformer model (such as vocab_size, d_model, n_heads, etc.) 
+# and training parameters (such as batch_size, max_epochs, learning_rate, etc.). 
+# It also includes methods for saving the configuration to a JSON file and loading it back.
+
+# Output: The TransformerConfig class provides a structured way to manage the hyperparameters 
+# for the transformer model, making it easier to maintain and modify the configuration as needed. 
+# The save and load methods allow for easy persistence of the configuration, 
+# enabling users to save their settings and reload them later for training or inference.
+
+# Used by: The TransformerConfig class is used by the NextTokenTransformerModel 
+# to initialize the model architecture based on the specified hyperparameters. 
+# It is also used by the Trainer class to access training parameters during 
+# the training loop, and by the AnomalyScorer class to access scoring parameters when evaluating sequences.
+
 """Stage 4B — Transformer: configuration dataclass."""
 from __future__ import annotations
 

@@ -1,3 +1,17 @@
+# src/security/auth.py
+
+# Purpose: Defines the AuthMiddleware class, which implements API key authentication for incoming HTTP requests. 
+# It checks the "X-API-Key" header against a configured value and allows or denies access accordingly. 
+# It also supports disabling authentication and defining public paths that bypass the check.
+
+# Input: - API key value (from environment variable or constructor argument)
+#        - Disable auth flag (from environment variable or constructor argument)
+
+# Output: - HTTP 401 response for unauthorized requests
+#         - Pass-through for authorized requests or when auth is disabled
+
+# Used by: - The main application to enforce authentication on incoming requests.
+
 """Stage 7 — Security: X-API-Key header authentication middleware."""
 from __future__ import annotations
 

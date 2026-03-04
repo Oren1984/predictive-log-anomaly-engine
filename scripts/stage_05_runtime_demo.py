@@ -1,3 +1,17 @@
+# scripts/stage_05_runtime_demo.py
+
+# Purpose: Simulate a live log stream and score windows using the InferenceEngine.
+
+# Input: Reads data/processed/events_tokenized.parquet, which contains tokenized events with timestamps, 
+# service/session IDs, token/template IDs, and labels.
+
+# Output: Writes reports/runtime_demo_results.csv (per-window scores and labels) and 
+# reports/runtime_demo_evidence.jsonl (detailed evidence for each window).
+
+# Used by: This script is a standalone runtime demo and is not directly used by other scripts, 
+# but it relies on the InferenceEngine class defined in src/runtime.py, which is the core of the scoring logic. 
+# The results and evidence it produces can be used for analysis and reporting in later stages.
+
 """
 Stage 05 — Runtime Demo: simulate a live log stream and score windows.
 

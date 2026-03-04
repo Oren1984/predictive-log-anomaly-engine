@@ -1,3 +1,15 @@
+# test/unit/test_sequence_buffer.py
+
+# Purpose: Unit tests for the SequenceBuffer class to verify correct buffering, windowing, and emission logic.
+
+# Input: None (test code only)
+
+# Output: Test results (pass/fail) when run with pytest.
+
+# Used by: N/A (these are unit tests for the SequenceBuffer class, 
+# indirectly used by the runtime calibration script and 
+# any real-time inference components that consume sequences from the buffer)
+
 """Unit tests for SequenceBuffer."""
 from __future__ import annotations
 

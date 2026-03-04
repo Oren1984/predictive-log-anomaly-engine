@@ -1,5 +1,8 @@
+# grafana/provisioning/dashboards/dashboards.yml
+
 apiVersion: 1
 
+# Define the dashboard providers for Grafana
 providers:
   - name: "Stage 08 Dashboards"
     orgId: 1

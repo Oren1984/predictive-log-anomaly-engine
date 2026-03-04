@@ -1,10 +1,28 @@
+# src/api/settings.py
+
+# Purpose: Define the Settings dataclass for the API, 
+# which encapsulates all configuration parameters for the service.
+# The settings are designed to be easily configurable via environment variables, 
+# allowing for flexible deployment and runtime configuration.
+
+# Input: The Settings class is defined as a dataclass, 
+# with each field corresponding to a specific configuration parameter for the API.
+# Each field has a default value that can be overridden by an environment variable.
+
+# Output: The Settings class provides a structured way to access configuration parameters throughout the API implementation.
+# It is used in the main application factory (src.api.app.py) to configure the API service
+# and in the Pipeline class (src.api.pipeline.py) to configure the inference engine and alert manager.
+
+# Used by: The Settings class defined in this file is used 
+# throughout the API implementation to access configuration settings.
+
 """Stage 7 — API: application settings (env-driven)."""
 from __future__ import annotations
 
 import os
 from dataclasses import dataclass, field
 
-
+# Helper to parse boolean environment variables with a default fallback.
 def _env_bool(name: str, default: bool) -> bool:
     val = os.environ.get(name, "").lower()
     if val in ("true", "1", "yes"):
@@ -13,7 +31,8 @@ def _env_bool(name: str, default: bool) -> bool:
         return False
     return default
 
-
+# Note: We could use Pydantic's BaseSettings here for more features (e.g., validation, .env files),
+# but a simple dataclass with env var fallbacks is sufficient for this stage.
 @dataclass
 class Settings:
     """
@@ -41,7 +60,9 @@ class Settings:
     public_endpoints: tuple[str, ...] = field(
         default_factory=lambda: tuple(
             p.strip()
-            for p in os.environ.get("PUBLIC_ENDPOINTS", "/health,/metrics").split(",")
+            for p in os.environ.get(
+                "PUBLIC_ENDPOINTS", "/health,/metrics,/,/query"
+            ).split(",")
             if p.strip()
         )
     )
@@ -83,4 +104,20 @@ class Settings:
     )
     demo_score: float = field(
         default_factory=lambda: float(os.environ.get("DEMO_SCORE", "2.0"))
+    )
+
+    # -- Demo warmup traffic
+    # When enabled, the API ingests a small synthetic batch on startup so the
+    # demo shows live data immediately.  Disabled by default; safe for prod.
+    demo_warmup_enabled: bool = field(
+        default_factory=lambda: _env_bool("DEMO_WARMUP_ENABLED", False)
+    )
+    demo_warmup_events: int = field(
+        default_factory=lambda: int(os.environ.get("DEMO_WARMUP_EVENTS", "75"))
+    )
+    # If > 0, repeat warmup every N seconds; otherwise run once.
+    demo_warmup_interval_seconds: float = field(
+        default_factory=lambda: float(
+            os.environ.get("DEMO_WARMUP_INTERVAL_SECONDS", "0")
+        )
     )

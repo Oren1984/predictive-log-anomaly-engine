@@ -1,3 +1,17 @@
+# src/alerts/n8n_client.py
+
+# Purpose: Implement the N8nWebhookClient class, which is responsible for sending alert payloads to an n8n webhook.
+
+# Input: The N8nWebhookClient class takes configuration parameters for the webhook URL, dry-run mode, timeout, and outbox directory. 
+# It provides a send method that accepts an Alert object and dispatches it 
+# according to the configured mode (either by POSTing to the webhook or writing to a local outbox).
+
+# Output: The send method returns a result dictionary indicating the status of the operation, 
+# including whether it was a dry run, the path to the outbox file, or the HTTP status code.
+
+# Used by: The N8nWebhookClient is used in the main API implementation (src.api.app.py) to send alerts to n8n when they are fired. 
+# It is also tested in the test file test_stage_06_n8n_outbox.py
+
 """Stage 6 — Alerts: n8n webhook client (safe DRY_RUN by default)."""
 from __future__ import annotations
 

@@ -1,3 +1,26 @@
+# src/modeling/baseline/model.py
+
+# Purpose: This module defines the `BaselineAnomalyModel` class, which is a thin wrapper around the 
+# `IsolationForest` algorithm from scikit-learn for anomaly detection. 
+# The class provides methods for fitting the model to a feature matrix,
+# scoring new data points to obtain anomaly scores, and making predictions based on a threshold.
+
+# Input: - The `fit` method takes a 2-D numpy array `X` of shape (n_samples, n_features) 
+#          containing the feature matrix for training.
+#        - The `score` method takes a 2-D numpy array `X` of shape (n_samples, n_features) 
+#          and returns a 1-D numpy array of anomaly scores, 
+#          where higher values indicate more anomalous instances.
+#        - The `predict` method takes a 2-D numpy array `X` and a float `threshold`, 
+#          and returns a 1-D numpy array of integer predictions (1 for anomaly, 0 for normal) 
+#          based on whether the anomaly scores exceed the threshold.
+
+# Output: - The `fit` method returns the `BaselineAnomalyModel` instance after fitting the model.
+#         - The `score` method returns a 1-D numpy array of anomaly scores.
+
+# Used by: Other modules in the project that require anomaly detection using the baseline model,
+# such as training scripts that need to fit the model on training data, 
+# or evaluation scripts that need to score or predict anomalies.
+
 """Stage 4A — Baseline: IsolationForest anomaly model wrapper."""
 from __future__ import annotations
 
