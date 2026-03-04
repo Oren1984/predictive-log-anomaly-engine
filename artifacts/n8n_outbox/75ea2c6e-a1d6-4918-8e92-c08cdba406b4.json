@@ -1,0 +1,28 @@
+{
+  "alert_id": "75ea2c6e-a1d6-4918-8e92-c08cdba406b4",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=5399: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO ddr: Unable to steer rank=<NUM>, symbol=<NUM> - ra...",
+      "tid=2948: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x0c01f1c0, mask 0x40",
+      "tid=2494: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x06c7e2e0, mask 0x08",
+      "tid=5480: - <HEX> <DATE> UNKNOWN_LOCATION <TS> UNKNOWN_LOCATION NULL DISCOVERY ERROR Missing reverse cable: Ca...",
+      "tid=3605: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x18e84b40, mask 0x02"
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 22
+  }
+}

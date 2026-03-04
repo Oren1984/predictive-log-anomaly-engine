@@ -1,0 +1,28 @@
+{
+  "alert_id": "272a5c9e-5bf8-40e2-8fcd-2089187cdacd",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=7587: KERNMNTF <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL Lustre mount FAILED : bglio804 : point <PA...",
+      "tid=1452: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL exception syndrome register: 0x00800000",
+      "tid=6359: - <HEX> <DATE> UNKNOWN_LOCATION <TS> UNKNOWN_LOCATION NULL DISCOVERY INFO New ido chip inserted into...",
+      "tid=1355: - <HEX> <DATE> <NODE> <TS> <NODE> RAS APP FATAL ciod: Error loading pr%nlev: invalid or missing prog...",
+      "tid=112: - <HEX> <DATE> <NODE> <TS> <NODE> NULL DISCOVERY INFO Node card VPD check: U01 node in processor car..."
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 50
+  }
+}

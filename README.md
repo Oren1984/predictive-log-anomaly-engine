@@ -1,143 +1,199 @@
-﻿# predictive-log-anomaly-engine
+﻿# Predictive Log Anomaly Engine
 
-Proactive AI system that learns the “language of errors” from logs, builds sequences, and produces risk/anomaly alerts.
+**Tech Stack:**  
+Python | FastAPI | Docker | Prometheus | Grafana | CI/CD
 
-Structure aligned to: data → parsing/templates → sequences → baseline/transformer → runtime inference → alerts → API/observability.
+AI system that learns the “language of failures” in software logs and detects risky behavioral patterns before incidents happen.
+
+Instead of reacting to failures after they occur, the engine analyzes event sequences in real time and produces early anomaly alerts.
+
+This project demonstrates how an AI-powered observability pipeline can be built as a complete runtime system.
 
 ---
 
-## Demo UI (Stage 7.1)
+## Project Highlights
 
-A minimal single-page interface runs inside the FastAPI service — no React, no build step.
+1. Log anomaly detection using sequence modeling
 
-### Start the stack
+2. Runtime inference engine
 
-```powershell
+3. Alert generation and severity scoring
+
+4. FastAPI service with interactive UI
+
+5. Observability with Prometheus + Grafana
+
+6. Containerized deployment with Docker
+
+7. CI/CD validation pipeline
+
+---
+
+## System Architecture
+
+The system follows a full AI runtime pipeline:
+
+Logs
+ ↓
+Parsing & Template Mining
+ ↓
+Sequence Builder
+ ↓
+ML Scoring Engine
+ ↓
+Alert Manager
+ ↓
+API Service
+ ↓
+Monitoring & Dashboards
+
+## Main Components
+
+1. Log Parser & Template Miner
+
+2. Sequence Builder
+
+3. Baseline AI Models
+
+4. Runtime Inference Engine
+
+5. Alert Manager
+
+6. FastAPI API Service
+
+7. Prometheus Metrics
+
+8. Grafana Dashboard
+
+---
+
+## Demo UI
+
+The project includes a minimal single-page interface built directly inside the FastAPI service.
+
+No frontend framework is required.
+
+---
+## Start the System
 docker compose build
 docker compose up
-```
-
-### Open the UI
-
-```
-http://localhost:8000/
-```
-
-### 3-step demo
-
-| Step | Action | What to show |
-|------|--------|--------------|
-| **1 — Ingest** | Click **”Ingest 10 Events”** | 10 events are sent; the demo engine fires alerts immediately |
-| **2 — Alerts** | Switch to the **Alerts** tab, click **”Refresh”** | Severity badges (critical / high / medium), scores, timestamps |
-| **3 — RAG Ask** | Switch to the **RAG Ask** tab, type a question, click **”Ask”** | Natural-language answer + 3 ranked source documents |
-
-#### Example questions for the RAG panel
-
-- *”How does the alert threshold work?”*
-- *”What model is used for anomaly detection?”*
-- *”Tell me about the dataset”*
-- *”How do I run with Docker?”*
-
-### Other services
-
-| Service | URL | Notes |
-|---------|-----|-------|
-| Prometheus | http://localhost:9090 | Raw metrics |
-| Grafana | http://localhost:3000 | admin / admin - Stage 08 dashboard |
 
 ---
 
-## Demo Mode Warmup (Stage 9.1)
-
-When `DEMO_WARMUP_ENABLED=true` the API ingests a synthetic batch on startup so
-the demo shows live data immediately — no manual clicks needed.
-
-### How it works
-
-1. App starts, models load (or fall back to demo scorer).
-2. After ~2 seconds a background task ingests `DEMO_WARMUP_EVENTS` (default 75)
-   synthetic log events through the normal `pipeline.process_event()` path.
-3. With `DEMO_MODE=true` + `WINDOW_SIZE=5` the events quickly fill windows and
-   trigger alerts — `GET /alerts` returns data before you even open the UI.
-4. The task logs one summary line: `DEMO_WARMUP: ingested 75 events, alerts=15`.
-
-### Env vars
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `DEMO_WARMUP_ENABLED` | `false` | Set `true` to activate warmup |
-| `DEMO_WARMUP_EVENTS` | `75` | Number of synthetic events per warmup run |
-| `DEMO_WARMUP_INTERVAL_SECONDS` | `0` | If `> 0`, repeat every N seconds; otherwise run once |
-
-### Verify warmup after `docker compose up`
-
-```bash
-# Build and start the stack
-docker compose down
-docker compose up --build
-
-# Wait ~5 seconds, then:
-curl http://localhost:8000/health          # status: healthy
-curl http://localhost:8000/alerts          # count > 0 (warmup fired alerts)
-curl http://localhost:8000/metrics | grep ingest_events_total   # counter > 0
-```
-
-`DEMO_WARMUP_ENABLED` is `true` in `docker-compose.yml` but defaults to `false`
-everywhere else, so tests and production are unaffected.
+## Open the UI
+http://localhost:8000
 
 ---
 
-## Testing (Stage 7.2)
-
-### Run the fast test suite (CI default)
-
-```powershell
-# All tests except slow model-dependent ones (~12 seconds)
-python -m pytest -m "not slow"
-```
-
-### Run specific subsets
-
-```powershell
-# Unit tests only
-python -m pytest tests/unit/
-
-# Integration tests (API, FastAPI TestClient)
-python -m pytest -m integration
-
-# Pipeline smoke test (always-fast, synthetic events + full pipeline)
-python -m pytest tests/test_pipeline_smoke.py -v
-
-# Slow model-dependent tests (requires trained model files in models/)
-python -m pytest -m slow
-```
-
-### Run the optional demo runner (no server needed)
-
-```powershell
-# 75 synthetic events, in-process TestClient, ~0.5 seconds
-python scripts/demo_run.py
-
-# Custom event count
-python scripts/demo_run.py --events 200
-```
-
-### Test markers
-
-| Marker | Meaning | When to run |
-|--------|---------|-------------|
-| *(none)* | Fast unit/smoke tests | Always |
-| `integration` | FastAPI TestClient integration tests | Always in CI |
-| `slow` | Model artifact-dependent tests | Locally after training |
-
-### CI workflow
-
-CI runs on every push and PR (`main`, `dev`) with three jobs:
-
-| Job | What it does |
-|-----|-------------|
-| **Lint + Tests** | flake8 + `pytest -m "not slow"` |
-| **Security** | pip-audit + Trivy |
-| **Docker** | Build image + compose smoke (health, metrics, ingest, alerts, UI, query) |
+## Demo Walkthrough
+Step	Action	What happens
+1. Ingest Events	Click Ingest 10 Events	Synthetic logs enter the pipeline
+2. Alerts	Open Alerts tab	Alerts appear with severity + score
+3. RAG Ask	Ask a question	System returns answer with sources
 
 ---
+
+## Example Questions
+
+1. How does the alert threshold work?
+
+2. What model is used for anomaly detection?
+
+3. What dataset is used for training?
+
+4. How do I run the system with Docker?
+
+---
+
+## Monitoring
+
+Two monitoring services are included.
+
+   Service	           URL
+1. Prometheus	http://localhost:9090
+
+2. Grafana	   http://localhost:3000
+
+
+## Grafana Dashboard Displays
+
+1. Ingestion rate
+
+2. Anomaly score distribution
+
+3. Alert counts
+
+4. System health metrics
+
+---
+
+## Quick Test Run
+1. Run the fast test suite
+pytest -m "not slow"
+
+2. Run integration tests
+pytest -m integration
+
+---
+
+## Tech Stack
+
+Core technologies used:
+
+1. Python
+
+2. FastAPI
+
+3. Machine Learning models
+
+4. Prometheus
+
+5. Grafana
+
+6. Docker
+
+7. Pytest
+
+8. GitHub Actions
+
+---
+
+## Project Team
+
+Developed as part of an AI Engineering project.
+
+
+## Team Members
+
+1. Oren Salami — DevOps / QA / System Integration
+
+2. Backend Developer
+
+
+3. Nahshon Raizman — Full-Stack Developer
+
+4. Full-Stack Developer
+
+---
+
+## Project Status
+
+Documentation & Finalization
+
+The system includes:
+
+1. Runtime inference
+
+2. Alert pipeline
+
+3. Observability stack
+
+4. Docker deployment
+
+5. CI/CD validation
+
+The repository represents a complete AI engineering prototype.
+
+---
+
+Built as part of an Applied AI Engineering project.

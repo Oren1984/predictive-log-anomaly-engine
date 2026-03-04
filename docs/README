@@ -1,0 +1,19 @@
+## System Demo
+
+### System Health
+![System Health](docs/screenshots/01_system_health.png)
+
+### Metrics Endpoint
+![Metrics](docs/screenshots/02_metrics_endpoint.png)
+
+### Log Ingestion UI
+![Ingest](docs/screenshots/03_ingest_ui.png)
+
+### Alert Dashboard
+![Alerts](docs/screenshots/04_alerts_dashboard.png)
+
+### RAG Knowledge Assistant
+![RAG](docs/screenshots/05_rag_assistant.png)
+
+### Observability (Grafana)
+![Grafana](docs/screenshots/06_grafana_dashboard.png)

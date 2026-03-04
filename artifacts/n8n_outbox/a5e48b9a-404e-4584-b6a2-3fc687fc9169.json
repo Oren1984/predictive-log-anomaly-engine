@@ -1,0 +1,28 @@
+{
+  "alert_id": "a5e48b9a-404e-4584-b6a2-3fc687fc9169",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=2173: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x0376bf20, mask 0x10",
+      "tid=1806: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x001004e0, mask 0x40",
+      "tid=4748: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO Kernel detected <NUM> integer alignment exceptions...",
+      "tid=2280: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x047ba900, mask 0x02",
+      "tid=5399: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO ddr: Unable to steer rank=<NUM>, symbol=<NUM> - ra..."
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 18
+  }
+}
