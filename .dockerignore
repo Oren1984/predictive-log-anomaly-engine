@@ -11,40 +11,41 @@
 
 # Used by: Docker
 
-# Git
-.git
-.gitignore
-
-# Python cache
-__pycache__
+# Python
+__pycache__/
 *.pyc
 *.pyo
 *.pyd
-.pytest_cache
-*.egg-info
 
-# Environment
+# Virtual env
+.venv/
 .env
-.venv
-venv
 
-# Heavy data / intermediate outputs (not needed at runtime)
-data/
-ai_workspace/
-reports/
-logs/
-runtime/
+# Data (ALL heavy outputs)
+data/raw/
+data/intermediate/
+data/processed/*.csv
+data/processed/*.parquet
 
-# Tests (not needed inside the image)
-tests/
+# Models
+models/
 
-# Docker assets (not needed inside the image)
-Dockerfile
-docker-compose.yml
-prometheus/
-grafana/
-docs/
+# Reports (keep only markdown)
+reports/*.csv
+reports/*.json
+reports/*.jsonl
+artifacts/*.json
 
-# Temp files
+# Logs
+ai_workspace/logs/
+
+# Claude temp cwd markers
+tmpclaude-*-cwd
+
+# Synthetic data
+data/synth/
+
+# Windows junk
 nul
-tmpclaude-*
+tmpclaude-*-cwdnul
+reports/*.
