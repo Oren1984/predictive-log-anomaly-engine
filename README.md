@@ -167,12 +167,12 @@ Developed as part of an AI Engineering project.
 
 1. Oren Salami — DevOps / QA / System Integration
 
-2. Backend Developer
+2. Dan Kalfon — Backend Developer
 
 
 3. Nahshon Raizman — Full-Stack Developer
 
-4. Full-Stack Developer
+4. Jonathan Finkelstein — Full-Stack Developer
 
 ---
 
