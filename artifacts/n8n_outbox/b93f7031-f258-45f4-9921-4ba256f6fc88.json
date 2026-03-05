@@ -1,0 +1,28 @@
+{
+  "alert_id": "b93f7031-f258-45f4-9921-4ba256f6fc88",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=4547: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO Kernel detected <NUM> integer alignment exceptions...",
+      "tid=1426: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL data address: 0x76172cb8",
+      "tid=1487: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL fpr18=0xffffffff <HEX> <HEX> <HEX>",
+      "tid=1686: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL rts: bad message header: index <NUM> greater than...",
+      "tid=6736: KERNMNTF <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL Lustre mount FAILED : bglio1000 : point <P..."
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 40
+  }
+}

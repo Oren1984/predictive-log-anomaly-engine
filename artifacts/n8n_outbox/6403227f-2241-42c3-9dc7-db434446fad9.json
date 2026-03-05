@@ -1,0 +1,28 @@
+{
+  "alert_id": "6403227f-2241-42c3-9dc7-db434446fad9",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=7430: KERNMNTF <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL Lustre mount FAILED : bglio668 : point <PA...",
+      "tid=6754: KERNMNTF <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL Lustre mount FAILED : bglio1016 : point <P...",
+      "tid=986: - <HEX> <DATE> <NODE> <TS> <NODE> NULL DISCOVERY INFO Node card VPD check: U11 node in processor car...",
+      "tid=1331: - <HEX> <DATE> <NODE> <TS> <NODE> RAS APP FATAL ciod: Error creating node map from file map.dat: Bad...",
+      "tid=68: - <HEX> <DATE> <NODE> <TS> <NODE> NULL DISCOVERY INFO Node card VPD check: U01 node in processor car..."
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 4
+  }
+}

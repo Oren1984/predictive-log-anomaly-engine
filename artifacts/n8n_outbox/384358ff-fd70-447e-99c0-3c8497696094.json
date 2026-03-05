@@ -1,0 +1,28 @@
+{
+  "alert_id": "384358ff-fd70-447e-99c0-3c8497696094",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=1331: - <HEX> <DATE> <NODE> <TS> <NODE> RAS APP FATAL ciod: Error creating node map from file map.dat: Bad...",
+      "tid=68: - <HEX> <DATE> <NODE> <TS> <NODE> NULL DISCOVERY INFO Node card VPD check: U01 node in processor car...",
+      "tid=7098: KERNMNTF <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL Lustre mount FAILED : bglio396 : point <PA...",
+      "tid=1758: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO <NUM> tree receiver <NUM> in re-synch state event(...",
+      "tid=6379: - <HEX> <DATE> UNKNOWN_LOCATION <TS> UNKNOWN_LOCATION NULL DISCOVERY INFO New ido chip inserted into..."
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 7
+  }
+}

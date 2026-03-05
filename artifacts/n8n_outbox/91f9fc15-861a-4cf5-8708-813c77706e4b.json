@@ -1,0 +1,28 @@
+{
+  "alert_id": "91f9fc15-861a-4cf5-8708-813c77706e4b",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=2761: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x09f84200, mask 0x80",
+      "tid=6894: KERNMNTF <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL Lustre mount FAILED : bglio224 : point <PA...",
+      "tid=936: - <HEX> <DATE> <NODE> <TS> <NODE> NULL DISCOVERY INFO Node card VPD check: U11 node in processor car...",
+      "tid=7028: KERNMNTF <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL Lustre mount FAILED : bglio336 : point <PA...",
+      "tid=5470: - <HEX> <DATE> UNKNOWN_LOCATION <TS> UNKNOWN_LOCATION NULL DISCOVERY ERROR Bad cable going into Link..."
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 34
+  }
+}

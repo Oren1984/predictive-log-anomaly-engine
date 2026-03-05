@@ -1,0 +1,28 @@
+{
+  "alert_id": "886709b7-a205-4910-be9a-873a36aa8d93",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=4420: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO Kernel detected <NUM> integer alignment exceptions...",
+      "tid=7813: KERNREC <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL Error receiving packet on tree network, exp...",
+      "tid=5463: - <HEX> <DATE> UNKNOWN_LOCATION <TS> UNKNOWN_LOCATION NULL DISCOVERY ERROR Bad cable going into Link...",
+      "tid=6513: - <HEX> <DATE> UNKNOWN_LOCATION <TS> UNKNOWN_LOCATION NULL DISCOVERY INFO Node card VPD check: U11 n...",
+      "tid=3536: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x187a8be0, mask 0x08"
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 60
+  }
+}

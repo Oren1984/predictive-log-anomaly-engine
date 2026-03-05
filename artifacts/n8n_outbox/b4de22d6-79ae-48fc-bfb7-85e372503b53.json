@@ -1,0 +1,28 @@
+{
+  "alert_id": "b4de22d6-79ae-48fc-bfb7-85e372503b53",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=936: - <HEX> <DATE> <NODE> <TS> <NODE> NULL DISCOVERY INFO Node card VPD check: U11 node in processor car...",
+      "tid=7028: KERNMNTF <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL Lustre mount FAILED : bglio336 : point <PA...",
+      "tid=5470: - <HEX> <DATE> UNKNOWN_LOCATION <TS> UNKNOWN_LOCATION NULL DISCOVERY ERROR Bad cable going into Link...",
+      "tid=5375: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO critical input interrupt (unit=0x0b bit=0x06): war...",
+      "tid=4547: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO Kernel detected <NUM> integer alignment exceptions..."
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 36
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "alert_id": "57eb4155-977b-4532-aa84-6e356bc64b18",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=5288: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO NFS Mount failed on bglio957, slept <NUM> seconds,...",
+      "tid=685: - <HEX> <DATE> <NODE> <TS> <NODE> NULL DISCOVERY INFO Node card VPD check: U11 node in processor car...",
+      "tid=1117: - <HEX> <DATE> <NODE> <TS> <NODE> NULL HARDWARE WARNING EndServiceAction <NUM> performed upon <NODE>...",
+      "tid=3618: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x18f60760, mask 0x80",
+      "tid=4420: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO Kernel detected <NUM> integer alignment exceptions..."
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 56
+  }
+}

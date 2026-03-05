@@ -1,0 +1,28 @@
+{
+  "alert_id": "f16ad44d-e8ad-4085-8bd5-39a1447aa2c0",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=3141: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x11222400, mask 0x04",
+      "tid=2048: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x0237ca00, mask 0x02",
+      "tid=57: - <HEX> <DATE> <NODE> <TS> <NODE> NULL DISCOVERY INFO Node card VPD check: U01 node in processor car...",
+      "tid=7781: KERNMNTF <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL Lustre mount FAILED : bglio973 : point <PA...",
+      "tid=2875: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x0b8582e0, mask 0x10"
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 20
+  }
+}

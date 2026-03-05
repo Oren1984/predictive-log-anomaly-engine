@@ -1,0 +1,28 @@
+{
+  "alert_id": "7a563665-7ee5-4d11-b1aa-ea166a0612b6",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=1758: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO <NUM> tree receiver <NUM> in re-synch state event(...",
+      "tid=6379: - <HEX> <DATE> UNKNOWN_LOCATION <TS> UNKNOWN_LOCATION NULL DISCOVERY INFO New ido chip inserted into...",
+      "tid=7214: KERNMNTF <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL Lustre mount FAILED : bglio50 : block_id :...",
+      "tid=5488: - <HEX> <DATE> UNKNOWN_LOCATION <TS> UNKNOWN_LOCATION NULL DISCOVERY INFO Ido chip status changed: F...",
+      "tid=1031: - <HEX> <DATE> <NODE> <TS> <NODE> NULL DISCOVERY WARNING Node card VPD check: U01 node in processor ..."
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 10
+  }
+}
