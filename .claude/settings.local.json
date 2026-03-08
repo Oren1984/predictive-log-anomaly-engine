@@ -6,7 +6,9 @@
       "Bash(ls:*)",
       "Bash(du:*)",
       "Bash(grep:*)",
-      "Bash(chmod +x:*)"
+      "Bash(chmod +x:*)",
+      "Bash(pip install:*)",
+      "Bash(sed:*)"
     ]
   }
 }
