@@ -1,16 +1,16 @@
 # src/engine/proactive_engine.py
 # Phase 7: AIOps Engine Integration
-#
+
 # ProactiveMonitorEngine orchestrates the full AI pipeline built in
 # Phases 2-6:
-#
+
 #   LogPreprocessor (Phase 2)
 #     -> rolling embedding buffer
 #     -> SystemBehaviorModel / LSTM (Phase 4)
 #     -> AnomalyDetector / DAE   (Phase 5)
 #     -> SeverityClassifier / MLP (Phase 6)
 #     -> EngineResult
-#
+
 # Design notes:
 #   - Completely isolated from the existing runtime pipeline.
 #     InferenceEngine (src/runtime/), Pipeline (src/api/pipeline.py),

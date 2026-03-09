@@ -1,0 +1,28 @@
+{
+  "alert_id": "ccbf6cc4-17ff-4636-bbd4-688568c8bae8",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=2618: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x08d22840, mask 0x40",
+      "tid=2610: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x08c8d5e0, mask 0x40",
+      "tid=1676: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL rts tree<PATH> link training failed: wanted: A C ...",
+      "tid=5071: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO Kernel detected <NUM> integer alignment exceptions...",
+      "tid=3354: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x13deb740, mask 0x80"
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 19
+  }
+}

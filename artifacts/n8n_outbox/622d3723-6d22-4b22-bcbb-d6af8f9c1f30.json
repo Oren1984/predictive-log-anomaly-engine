@@ -1,0 +1,28 @@
+{
+  "alert_id": "622d3723-6d22-4b22-bcbb-d6af8f9c1f30",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=435: - <HEX> <DATE> <NODE> <TS> <NODE> NULL DISCOVERY INFO Node card VPD check: U01 node in processor car...",
+      "tid=1472: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL fpr11=0x695c6701 <HEX> <HEX> <HEX>",
+      "tid=2422: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x065271c0, mask 0x80",
+      "tid=1859: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x002372a0, mask 0x02",
+      "tid=5444: - <HEX> <DATE> NULL <TS> NULL RAS MMCS INFO idoproxydb has been started: $Name: V1R1M0_246_2005 $ In..."
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 65
+  }
+}

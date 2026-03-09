@@ -9,7 +9,9 @@
       "Bash(chmod +x:*)",
       "Bash(pip install:*)",
       "Bash(sed:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(/tmp/tree_summary.txt:*)",
+      "Read(//tmp/**)"
     ]
   }
 }

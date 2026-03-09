@@ -197,10 +197,11 @@ def test_ui_index_returns_200(api):
 
 
 def test_ui_index_contains_expected_sections(api):
-    """The HTML page must include all three panel identifiers."""
+    """The HTML page must include the Phase 8 observability dashboard section identifiers."""
     client, _ = api
     body = client.get("/").text
-    for section in ("panel-ingest", "panel-alerts", "panel-rag"):
+    for section in ("section-dashboard", "section-alerts", "section-investigation",
+                    "section-health", "section-metrics"):
         assert section in body, f"Missing section: {section}"
 
 

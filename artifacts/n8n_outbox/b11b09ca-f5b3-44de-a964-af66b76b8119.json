@@ -1,0 +1,28 @@
+{
+  "alert_id": "b11b09ca-f5b3-44de-a964-af66b76b8119",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=2060: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x0261f760, mask 0x40",
+      "tid=741: - <HEX> <DATE> <NODE> <TS> <NODE> NULL DISCOVERY INFO Node card VPD check: U11 node in processor car...",
+      "tid=1606: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL minus inf................................<NUM>",
+      "tid=2: - <HEX> <DATE> - <TS> \u000f.\u00b2\u00d0M\u00b7q8O\u00ef\u00e3`\u000f)\u00d9pO\u00ef\u00e3pO\u00ef\u00e3@O\u00ef\u00e3@ RAS KERNEL INFO <NUM> floating point alignment ex...",
+      "tid=2462: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x0694dd80, mask 0x01"
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 9
+  }
+}

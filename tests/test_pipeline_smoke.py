@@ -223,5 +223,6 @@ class TestDemoUI:
     def test_ui_has_all_panels(self, smoke_api):
         client, _ = smoke_api
         html = client.get("/").text
-        for panel_id in ("panel-ingest", "panel-alerts", "panel-rag"):
-            assert panel_id in html, f"Missing panel: {panel_id}"
+        for section_id in ("section-dashboard", "section-alerts",
+                           "section-investigation", "section-health", "section-metrics"):
+            assert section_id in html, f"Missing section: {section_id}"

@@ -1,0 +1,28 @@
+{
+  "alert_id": "e3c50012-ac09-41d2-8d5f-f54f3fb32f9c",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=2: - <HEX> <DATE> - <TS> \u000f.\u00b2\u00d0M\u00b7q8O\u00ef\u00e3`\u000f)\u00d9pO\u00ef\u00e3pO\u00ef\u00e3@O\u00ef\u00e3@ RAS KERNEL INFO <NUM> floating point alignment ex...",
+      "tid=2462: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x0694dd80, mask 0x01",
+      "tid=4300: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO Kernel detected <NUM> integer alignment exceptions...",
+      "tid=1113: - <HEX> <DATE> <NODE> <TS> <NODE> NULL HARDWARE SEVERE NodeCard power module U69 is not accessible",
+      "tid=4950: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO Kernel detected <NUM> integer alignment exceptions..."
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 12
+  }
+}
