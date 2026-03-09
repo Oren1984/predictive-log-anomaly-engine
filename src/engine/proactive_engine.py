@@ -1,4 +1,11 @@
 # src/engine/proactive_engine.py
+#
+# STATUS: LEGACY — Phase 7 development orchestrator (not wired to production API)
+#
+# This module is NOT part of the live inference path.
+# Active production path: src/runtime/inference_engine.py + src/api/pipeline.py
+# Retained for: test coverage (test_proactive_engine.py) and reference architecture.
+#
 # Phase 7: AIOps Engine Integration
 
 # ProactiveMonitorEngine orchestrates the full AI pipeline built in

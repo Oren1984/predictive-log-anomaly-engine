@@ -24,6 +24,7 @@ from typing import Optional
 from prometheus_client import (
     CollectorRegistry,
     Counter,
+    Gauge,
     Histogram,
     generate_latest,
     CONTENT_TYPE_LATEST,
@@ -47,6 +48,7 @@ class MetricsRegistry:
     ingest_errors_total          Counter  — unhandled errors in /ingest
     ingest_latency_seconds       Histogram — end-to-end /ingest handler latency
     scoring_latency_seconds      Histogram — model scoring latency (per window)
+    service_health               Gauge    — application health: 1=healthy, 0.5=degraded, 0=unhealthy
     """
 
     def __init__(self, registry: Optional[CollectorRegistry] = None) -> None:
@@ -85,6 +87,14 @@ class MetricsRegistry:
             buckets=(0.001, 0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1.0),
             registry=self.registry,
         )
+        # Initialise optimistically; the /health handler updates this on each poll.
+        # Values: 1.0=healthy  0.5=degraded  0.0=unhealthy
+        self.service_health = Gauge(
+            "service_health",
+            "Application health state: 1=healthy, 0.5=degraded, 0=unhealthy",
+            registry=self.registry,
+        )
+        self.service_health.set(1.0)
 
     def generate_text(self) -> tuple[str, str]:
         """Return (body, content_type) for the /metrics endpoint."""
@@ -96,7 +106,8 @@ class MetricsRegistry:
 
 class MetricsMiddleware(BaseHTTPMiddleware):
     """
-    Records HTTP request counts and latency for every route.
+    Records POST /ingest latency via the ingest_latency_seconds histogram.
+    Other routes are passed through without instrumentation.
     Only active when a MetricsRegistry is wired into app state.
     """
 

@@ -1,95 +1,161 @@
 ﻿# Predictive Log Anomaly Engine
 
-**Tech Stack:**  
-Python | FastAPI | Docker | Prometheus | Grafana | CI/CD
+AI-powered observability and anomaly detection system for software logs.
 
-AI system that learns the “language of failures” in software logs and detects risky behavioral patterns before incidents happen.
+This project detects risky behavioral patterns in log streams **before full service failure occurs**.  
+Instead of reacting only after incidents happen, the engine analyzes event sequences in real time, scores anomalous behavior, generates alerts, and exposes a complete observability stack for investigation.
 
-Instead of reacting to failures after they occur, the engine analyzes event sequences in real time and produces early anomaly alerts.
+## Tech Stack
 
-This project demonstrates how an AI-powered observability pipeline can be built as a complete runtime system.
+Python • FastAPI • Docker • Prometheus • Grafana • Pytest • GitHub Actions
 
 ---
 
-## Project Highlights
+## Overview
 
-1. Log anomaly detection using sequence modeling
+Traditional monitoring systems usually detect failures **after** they already impact the system, for example through CPU spikes, crashes, or error bursts.
 
-2. Runtime inference engine
+The **Predictive Log Anomaly Engine** takes a more proactive approach:
 
-3. Alert generation and severity scoring
+- parses and normalizes raw logs
+- extracts behavioral templates
+- builds event sequences
+- applies AI-based anomaly scoring
+- generates severity-based alerts
+- exposes runtime metrics and dashboards for investigation
 
-4. FastAPI service with interactive UI
+The result is a full AI runtime pipeline combined with an observability and alerting layer.
 
-5. Observability with Prometheus + Grafana
+---
 
-6. Containerized deployment with Docker
+## Key Capabilities
 
-7. CI/CD validation pipeline
+- Real-time log anomaly detection using sequence-based analysis
+- Runtime inference pipeline for streaming event ingestion
+- Severity scoring and alert generation
+- FastAPI service with built-in investigation UI
+- Prometheus metrics and Grafana dashboards
+- Docker-based local deployment
+- CI/CD validation with automated tests
 
 ---
 
 ## System Architecture
 
-The system follows a full AI runtime pipeline:
+The system follows a full runtime pipeline:
 
+```text
 Logs
- ↓
+  ↓
 Parsing & Template Mining
- ↓
+  ↓
 Sequence Builder
- ↓
+  ↓
 ML Scoring Engine
- ↓
+  ↓
 Alert Manager
- ↓
-API Service
- ↓
-Monitoring & Dashboards
+  ↓
+FastAPI Service
+  ↓
+Prometheus + Grafana
+  ↓
+Investigation UI
+
+```
 
 ## Main Components
+1. Parsing & Template Mining:
 
-1. Log Parser & Template Miner
+   Transforms raw logs into structured templates that reduce noise and preserve behavioral patterns.
 
-2. Sequence Builder
+2. Sequence Builder:
 
-3. Baseline AI Models
+   Builds event windows and sequences that represent operational behavior over time.
 
-4. Runtime Inference Engine
+3. ML Scoring Engine:
 
-5. Alert Manager
+   Applies anomaly detection logic to detect suspicious or unusual behavior patterns.
 
-6. FastAPI API Service
+4. Alert Manager:
 
-7. Prometheus Metrics
+   Generates alerts with severity levels, cooldown handling, and alert lifecycle logic.
 
-8. Grafana Dashboard
+5. API Service:
+
+   Exposes ingestion, health, alerts, metrics, and UI-related endpoints through FastAPI.
+
+6. Observability Layer:
+
+   Integrates Prometheus metrics, Grafana dashboards, and health visibility for runtime monitoring.
+
+7. Investigation UI:
+
+   Provides a lightweight read-only interface for reviewing alerts, system state, and future investigation workflows.
+
+---
+
+## Included Observability Features
+
+The project includes an operational observability stack with:
+
+1. Prometheus metrics collection
+
+2. Grafana dashboard provisioning
+
+3. System health visibility
+
+4. Ingest error visibility
+
+5. Alert-oriented monitoring rules
+
+6. Production-style compose override (docker-compose.prod.yml)
 
 ---
 
 ## Demo UI
 
-The project includes a minimal single-page interface built directly inside the FastAPI service.
+The project includes a minimal UI served directly by FastAPI.
 
-No frontend framework is required.
+The UI is intentionally lightweight and read-only.
+Its role is to support observability and investigation, not backend reconfiguration.
+
+Current and planned UI direction:
+
+1. alert review
+
+2. anomaly investigation
+
+3. health inspection
+
+4. future RAG-style investigation assistance
 
 ---
-## Start the System
+
+## Quick Start
+
+### Build and run
+```bash
 docker compose build
 docker compose up
+```
 
 ---
 
-## Open the UI
-http://localhost:8000
+## Open the services
+- API / UI: http://localhost:8000
+
+- Prometheus: http://localhost:9090
+
+- Grafana: http://localhost:3000
 
 ---
 
 ## Demo Walkthrough
-Step	Action	What happens
-1. Ingest Events	Click Ingest 10 Events	Synthetic logs enter the pipeline
-2. Alerts	Open Alerts tab	Alerts appear with severity + score
-3. RAG Ask	Ask a question	System returns answer with sources
+Step	      Action	               Expected Result
+1	         Ingest events	         Synthetic logs enter the runtime pipeline
+2	         Open alerts view	      Alerts appear with severity and score
+3	         Open dashboard	         Prometheus / Grafana show runtime activity
+4	         Query the system	      Investigation-oriented answer is returned
 
 ---
 
@@ -101,99 +167,93 @@ Step	Action	What happens
 
 3. What dataset is used for training?
 
-4. How do I run the system with Docker?
+4. How does the health signal work?
+
+5. How do I run the system with Docker?
 
 ---
 
-## Monitoring
-
-Two monitoring services are included.
-
-   Service	           URL
-1. Prometheus	http://localhost:9090
-
-2. Grafana	   http://localhost:3000
-
-
-## Grafana Dashboard Displays
-
-1. Ingestion rate
-
-2. Anomaly score distribution
-
-3. Alert counts
-
-4. System health metrics
-
----
-
-## Quick Test Run
-1. Run the fast test suite
+## Testing
+Fast test suite
+```bash
 pytest -m "not slow"
+```
 
-2. Run integration tests
+Integration tests
+```bash
 pytest -m integration
+```
 
 ---
 
-## Tech Stack
+## Documentation Structure
 
-Core technologies used:
+Additional project documentation is organized under docs/:
 
-1. Python
+1. docs/current_system/ — current architecture, roadmap, UI direction
 
-2. FastAPI
+2. docs/api/ — API reference
 
-3. Machine Learning models
+3. docs/operations/ — alerts, deployment, metrics, security
 
-4. Prometheus
-
-5. Grafana
-
-6. Docker
-
-7. Pytest
-
-8. GitHub Actions
+4. docs/system_validation/ — audit and validation reports
 
 ---
 
 ## Project Team
 
-Developed as part of an AI Engineering project.
+Developed as part of an Applied AI Engineering project.
 
-
-## Team Members
-
-1. Oren Salami — DevOps / QA / System Integration
-
-2. Dan Kalfon — Backend Developer
-
-
-3. Nahshon Raizman — Full-Stack Developer
-
-4. Jonathan Finkelstein — Full-Stack Developer
+- **Oren Salami** — DevOps, QA, System Integration, Observability Stack (Docker, Prometheus, Grafana), CI/CD
+- **Dan Kalfon** — Backend Engineering, Core Architecture Design, Technical Specification
+- **Nahshon Raizman** — Frontend Development and UI Implementation
+- **Jonathan Finkelstein** — Frontend Development and UI Integration
 
 ---
 
 ## Project Status
 
-Documentation & Finalization
+Current repository status:
 
-The system includes:
+1. runtime inference pipeline implemented
 
-1. Runtime inference
+2. alert pipeline implemented
 
-2. Alert pipeline
+3. observability stack integrated
 
-3. Observability stack
+4. Grafana and Prometheus configured
 
-4. Docker deployment
+5. production-style deployment override added
 
-5. CI/CD validation
+6. validation and tests passing
 
-The repository represents a complete AI engineering prototype.
+7. UI implemented for alert review and investigation workflows
+
+All tests passing (578 tests) and full containerized runtime included.
+
+This repository represents a complete AI engineering prototype with strong emphasis on runtime behavior, observability, and investigation workflows.
 
 ---
 
+## Career / Portfolio Value
+
+This project demonstrates practical work across:
+
+1. AI runtime systems
+
+2. anomaly detection workflows
+
+3. FastAPI backend engineering
+
+4. observability architecture
+
+5. Docker-based deployment
+
+6. CI/CD validation
+
+7. investigation-oriented system design
+
+
 Built as part of an Applied AI Engineering project.
+
+--- 

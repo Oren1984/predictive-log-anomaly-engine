@@ -40,7 +40,7 @@ ENV PYTHONUNBUFFERED=1
 # Expose API port
 EXPOSE 8000
 
-HEALTHCHECK --interval=15s --timeout=5s --start-period=30s --retries=3 \
+HEALTHCHECK --interval=15s --timeout=5s --start-period=30s --retries=5 \
     CMD curl -f http://localhost:8000/health || exit 1
 
 # Start FastAPI server

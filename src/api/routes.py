@@ -145,9 +145,12 @@ async def list_alerts(request: Request) -> AlertListResponse:
 # GET /health
 # ---------------------------------------------------------------------------
 
+_HEALTH_GAUGE_VALUES = {"healthy": 1.0, "degraded": 0.5}
+
+
 @router.get("/health", response_model=HealthResponse)
 async def health(request: Request) -> HealthResponse:
-    """Liveness + readiness probe."""
+    """Liveness + readiness probe. Also updates the service_health Prometheus gauge."""
     checker = getattr(request.app.state, "health_checker", None)
     if checker is None:
         return HealthResponse(
@@ -156,6 +159,14 @@ async def health(request: Request) -> HealthResponse:
             components={},
         )
     payload = checker.check()
+
+    # Reflect application health state in Prometheus so Grafana and alert rules
+    # can observe real component status rather than mere scrape reachability.
+    metrics_reg = getattr(request.app.state, "metrics", None)
+    if metrics_reg is not None:
+        gauge_value = _HEALTH_GAUGE_VALUES.get(payload["status"], 0.0)
+        metrics_reg.service_health.set(gauge_value)
+
     return HealthResponse(**payload)
 
 
