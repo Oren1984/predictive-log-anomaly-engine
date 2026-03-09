@@ -8,7 +8,8 @@
       "Bash(grep:*)",
       "Bash(chmod +x:*)",
       "Bash(pip install:*)",
-      "Bash(sed:*)"
+      "Bash(sed:*)",
+      "Bash(mkdir:*)"
     ]
   }
 }

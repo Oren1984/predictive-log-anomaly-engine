@@ -1,0 +1,28 @@
+{
+  "alert_id": "7df0d4fb-a690-4a94-81ed-921043689555",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=2392: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x061071c0, mask 0x80",
+      "tid=6659: - <HEX> <DATE> UNKNOWN_LOCATION <TS> UNKNOWN_LOCATION NULL HARDWARE SEVERE NodeCard VPD is corrupt",
+      "tid=1177: - <HEX> <DATE> <NODE> <TS> <NODE> NULL HARDWARE WARNING PrepareForService shutting down LinkCard(mLc...",
+      "tid=7261: KERNMNTF <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL Lustre mount FAILED : bglio536 : point <PA...",
+      "tid=1523: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL fpr6=0x7f9cc4ba <HEX> <HEX> <HEX>"
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 2
+  }
+}

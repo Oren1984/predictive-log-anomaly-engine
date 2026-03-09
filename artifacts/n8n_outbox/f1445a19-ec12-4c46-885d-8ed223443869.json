@@ -1,0 +1,28 @@
+{
+  "alert_id": "f1445a19-ec12-4c46-885d-8ed223443869",
+  "severity": "critical",
+  "service": "demo",
+  "score": 100.0,
+  "timestamp": 0.0,
+  "evidence_window": {
+    "templates_preview": [
+      "tid=7378: KERNMNTF <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL FATAL Lustre mount FAILED : bglio628 : block_id ...",
+      "tid=3670: - <HEX> <DATE> <NODE> <TS> <NODE> RAS KERNEL INFO CE sym <NUM>, at 0x1a15fd00, mask 0x04",
+      "tid=5440: - <HEX> <DATE> NULL <TS> NULL RAS MMCS INFO ciodb has been restarted.",
+      "tid=1124: - <HEX> <DATE> <NODE> <TS> <NODE> NULL HARDWARE WARNING PrepareForService is being done on this Midp...",
+      "tid=6603: - <HEX> <DATE> UNKNOWN_LOCATION <TS> UNKNOWN_LOCATION NULL DISCOVERY SEVERE Problem communicating wi..."
+    ],
+    "token_count": 5,
+    "start_ts": 0.0,
+    "end_ts": 0.0
+  },
+  "model_name": "baseline",
+  "threshold": 0.3303178258763508,
+  "meta": {
+    "stream_key": "demo:warmup-session",
+    "is_anomaly": true,
+    "window_size": 5,
+    "label": 0,
+    "emit_index": 57
+  }
+}
