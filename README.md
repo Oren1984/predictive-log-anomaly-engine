@@ -204,10 +204,15 @@ Additional project documentation is organized under docs/:
 
 Developed as part of an Applied AI Engineering project.
 
-- **Oren Salami** — DevOps, QA, System Integration, Observability Stack (Docker, Prometheus, Grafana), CI/CD
+- **Oren Salami** — DevOps, QA, Core Architecture Design, Technical Specification
+
 - **Dan Kalfon** — Backend Engineering, Core Architecture Design, Technical Specification
-- **Nahshon Raizman** — Frontend Development and UI Implementation
-- **Jonathan Finkelstein** — Frontend Development and UI Integration
+
+- **Nahshon Raizman** — Frontend Development and UI , Core Architecture Design, Technical
+                        Specification
+
+- **Jonathan Finkelstein** — Frontend Development and UI , Core Architecture Design, Technical
+                             Specification
 
 ---
 
